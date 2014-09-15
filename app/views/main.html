@@ -1,0 +1,30 @@
+<h1>Browse Extensions</h1>
+
+<!-- <div> Extra div added to add the default display:block behavior around the enclosed div -->
+<!--     <div class="col-md-6 col-md-offset-3 form-inline main-dropdown">
+        <select ng-model="model.selectedCategory" ng-options="category.list_name for category in model.categories" class="dropdown-toggle form-control">
+                <option value="">-- choose category --</option>
+        </select>
+        <button ng-click="model.fetchBestSellers()" class="btn btn-default form-control">Get BestSellers!</button>
+
+    </div> -->
+<!-- </div> -->
+
+<table class="table">
+    <tr>
+        <td>Extension Name</td>
+        <td>Group ID</td>
+        <td>Artifact ID</td>
+        <td>Release ID</td>
+    </tr>
+    <tr ng-repeat="extension in model.extensionList">
+        <td> {{ extension.name }}  </td>
+        <td> {{ extension.id }}  </td>
+        <td> {{ extension.id }}  </td>
+        <td> {{ extension.id }}  </td>
+    </tr>
+</table>
+
+<!--  <pager total-items="model.totalItems" items-per-page="20" ng-model="model.currentPage" ng-click="model.fetchBestSellersNextPage()"></pager>
+
+ <footer class="footer">{{ model.copyright }}</footer> -->

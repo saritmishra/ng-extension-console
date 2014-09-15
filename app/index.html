@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="extensionConsole">
+<head>
+    <title>Extension Console</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="icon" type="image/png" href="favicon.gif">
+</head>
+
+<body>
+
+    <div class="container" ng-view=""></div>
+
+    <script type="text/javascript" src="lib/angular.js"></script>
+    <script type="text/javascript" src="lib/angular-resource.js"></script>
+    <script type="text/javascript" src="lib/angular-route.js"></script>
+    <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.11.0.js"></script>
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <script type="text/javascript" src="scripts/services/extensionConsoleFactory.js"></script>
+    <script type="text/javascript" src="scripts/controllers/extensionConsoleController.js"></script>
+    <!-- <script type="text/javascript" src="scripts/directives/rating.js"></script> -->
+
+
+</body>
+</html>
