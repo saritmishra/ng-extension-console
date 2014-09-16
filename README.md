@@ -1,4 +1,4 @@
-Angular-NYtimes
-===============
+ng-extension-console
+====================
 
-AngularJS app that talks to NY Times BestSellers API
+Using Angular to build a skeleton  console
