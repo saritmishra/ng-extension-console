@@ -11,13 +11,15 @@
 <!-- </div> -->
 
 
-<table class="table">
-    <tr>
-        <td>Extension Name</td>
-        <td>Group ID</td>
-        <td>Artifact ID</td>
-        <td>Release ID</td>
-    </tr>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Extension Name</th>
+            <th>Group ID</th>
+            <th>Artifact ID</th>
+            <th>Release ID</th>
+        </tr>
+    </thead>
     <tr ng-repeat="extension in model.getExtensionDetails()">
         <td ng-dblclick="model.getExtensionDetails(extension)"> {{ extension.name }}  </td>
         <td ng-dblclick="model.getExtensionDetails(extension)"> {{ extension.groupID }}  </td>
