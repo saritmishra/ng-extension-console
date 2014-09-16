@@ -13,12 +13,16 @@ angular
     .config( function ( $routeProvider ) {
 
         $routeProvider
-            .when("/", {
-                templateUrl: "views/main.html",
-                controller: "extensionConsoleController"
+            .when("/view", {
+                templateUrl: "views/viewExtensions.html",
+                controller: "viewExtensionsController"
+            })
+            .when("/create", {
+                templateUrl: "views/createExtension.html",
+                controller: "createExtensionController"
             })
             .otherwise({
-                redirectTo: "/"
+                redirectTo: "/view"
             });
     });
 

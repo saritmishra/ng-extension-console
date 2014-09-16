@@ -8,6 +8,22 @@
 </head>
 
 <body>
+    <h1>Extension Manager</h1>
+    <!-- Setting up a tabbed nav-bar to traverse different options -->
+<!--     <tabset>
+        <tab select="model.viewExtensions()">
+            <tab-heading>View Extensions</tab-heading>
+        </tab>
+        <tab select="model.createExtension()">
+            <tab-heading>Create Extension</tab-heading>
+        </tab>
+    </tabset> -->
+
+    <ul>
+        <li><a href="#/create">Create Extension</a></li>
+        <li><a href="#/view">View Extensions</a></li>
+        <li><a href="">Do something else</a></li>
+    </ul>
 
     <div class="container" ng-view=""></div>
 
@@ -17,7 +33,9 @@
     <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.11.0.js"></script>
     <script type="text/javascript" src="scripts/app.js"></script>
     <script type="text/javascript" src="scripts/services/extensionConsoleFactory.js"></script>
-    <script type="text/javascript" src="scripts/controllers/extensionConsoleController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/viewExtensionsController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/createExtensionController.js"></script>
+
     <!-- <script type="text/javascript" src="scripts/directives/rating.js"></script> -->
 
 

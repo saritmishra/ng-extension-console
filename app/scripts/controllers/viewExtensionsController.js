@@ -2,7 +2,7 @@
 (function () {
     "use strict";
 
-    var extensionConsoleController = function ($scope, extensionConsoleFactory) {
+    var viewExtensionsController = function ($scope, extensionConsoleFactory) {
 
         var model = $scope.model = {"extensionList" : [{ "name" : "app-name", "id" : "ID001" }, { "name" : "app-name2", "id" : "ID002" }]};
 
@@ -13,6 +13,9 @@
             // model.copyright = "";
             // model.rating ="2";
 
+        model.getExtensionDetails = function(extension) {
+            // return
+        };
 
         model.getCategories = function() {
             return bestSellerFactory.getCategories()
@@ -63,5 +66,5 @@
 
     };
 
-    angular.module("extensionConsole").controller("extensionConsoleController", [ "$scope", "extensionConsoleFactory", extensionConsoleController]);
+    angular.module("extensionConsole").controller("viewExtensionsController", [ "$scope", "extensionConsoleFactory", viewExtensionsController]);
 }());
