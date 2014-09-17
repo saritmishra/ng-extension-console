@@ -5,13 +5,6 @@
     var viewExtensionsController = function ($scope, extensionConsoleFactory) {
 
         var model = $scope.model = {};
-
-            // model.bestSellers = [];
-            // model.personalRatings = []; //Not very useful - Not linked to individual books and lost after page-refresh
-            // model.categories = [];
-            // model.totalItems = 0;
-            // model.copyright = "";
-            // model.rating ="2";
         $scope.hidden = false;
 
         model.getExtensionDetails = function(extension) {
