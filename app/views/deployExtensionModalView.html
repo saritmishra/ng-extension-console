@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h3 class="modal-title">Im a modal!</h3>
+</div>
+<div class="modal-body">
+    <ul>
+        <li>{{ extension.name }}</li>
+        <li>{{ extension.groupID }}</li>
+        <li>{{ extension.artifactID }}</li>
+        <li>{{ extension.releaseID }}</li>
+        <li>
+            <div class="form-group has-feedback">
+            <label for="version">Version</label>
+            <input type="text" class="form-control" id="version" placeholder="Enter Version" ng-model="extension.version">
+            </div>
+        </li>
+        <li>
+            <div class="form-group has-feedback">
+            <label for="instance">instance</label>
+            <input type="text" class="form-control" id="instance" placeholder="Enter instance" ng-model="extension.instance">
+            </div>
+        </li>
+        <li>
+            <div class="form-group has-feedback">
+            <label for="profile">profile</label>
+            <input type="text" class="form-control" id="profile" placeholder="Enter profile" ng-model="extension.profile">
+            </div>
+        </li>
+        <li>
+            <div class="form-group has-feedback">
+            <label for="configuration">configuration</label>
+            <input type="text" class="form-control" id="configuration" placeholder="Enter configuration" ng-model="extension.configuration">
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

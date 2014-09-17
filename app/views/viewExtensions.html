@@ -29,7 +29,7 @@
         <td ng-click="hidden = !hidden"> {{ extension.groupID }}  </td>
         <td ng-click="hidden = !hidden"> {{ extension.artifactID }}  </td>
         <td ng-click="hidden = !hidden"> {{ extension.releaseID }}  </td>
-        <td><button class="btn btn-default ">Deploy an instance</button></td>
+        <td><button class="btn btn-default " ng-click="model.extensionToDeploy = extension; openDeployModal()">Deploy an instance</button></td>
     </tr>
     <tr ng-show="hidden">
         <td colspan="4">
@@ -52,4 +52,31 @@
             </td>
         </tr>
     </tbody>
+</table>
+
+<h2>Recently deployed instances</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Extension Name</th>
+        <th>Group ID</th>
+        <th>Artifact ID</th>
+        <th>Release ID</th>
+        <th>Version</th>
+        <th>Deployed Instance</th>
+        <th>Profile</th>
+        <th>Configuration</th>
+    </tr>
+    </thead>
+    <tr>
+        <td> {{ deployedExtension.name }}</td>
+        <td> {{ deployedExtension.groupID }}</td>
+        <td> {{ deployedExtension.artifactID }}</td>
+        <td> {{ deployedExtension.releaseID }}</td>
+        <td> {{ deployedExtension.version }}</td>
+        <td>{{ deployedExtension.instance }}</td>
+        <td>{{ deployedExtension.profile }}</td>
+        <td>{{ deployedExtension.configuration }}</td>
+    </tr>
 </table>

@@ -2,7 +2,7 @@
 (function () {
     "use strict";
 
-    var viewExtensionsController = function ($scope, extensionConsoleFactory) {
+    var viewExtensionsController = function ($scope, extensionConsoleFactory, $modal, $log) {
 
         var model = $scope.model = {};
         $scope.hidden = false;
@@ -10,6 +10,30 @@
         model.getExtensionDetails = function(extension) {
             return extensionConsoleFactory.extensionList;
         };
+
+
+        // S E T T I N G    U P   T H E   D E P L O Y   M O D A L   W I N D O W
+        $scope.openDeployModal = function () {
+            var modalInstance = $modal.open({
+              templateUrl: "views/deployExtensionModalView.html",
+              controller: "deployExtensionModalController",
+              // size: "small",
+              resolve: { //making sure these are available to the modal controller
+                extension: function () {
+                    return model.extensionToDeploy; //
+                }
+              }
+            });
+
+            modalInstance.result.then(function (deployedExtension) { // how about putting a return in front
+              //OK clicked on modal
+              $scope.deployedExtension = deployedExtension;
+            }, function () {
+              //modal dismissed
+              $log.info("Deploy modal dismissed at: " + new Date());
+            });
+        }; // S E T T I N G    U P   T H E   D E P L O Y   M O D A L   W I N D O W
+
 
         // model.getCategories = function() {
         //     return bestSellerFactory.getCategories()
@@ -60,5 +84,5 @@
 
     };
 
-    angular.module("extensionConsole").controller("viewExtensionsController", [ "$scope", "extensionConsoleFactory", viewExtensionsController]);
+    angular.module("extensionConsole").controller("viewExtensionsController", [ "$scope", "extensionConsoleFactory", "$modal", "$log", viewExtensionsController]);
 }());
