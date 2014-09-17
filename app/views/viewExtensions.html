@@ -1,3 +1,18 @@
+<!-- <div> Extra div added to add the default display:block behavior around the enclosed div -->
+<!--     <div class="col-md-6 col-md-offset-3 form-inline main-dropdown">
+        <select ng-model="model.selectedCategory" ng-options="category.list_name for category in model.categories" class="dropdown-toggle form-control">
+                <option value="">-- choose category --</option>
+        </select>
+        <button ng-click="model.fetchBestSellers()" class="btn btn-default form-control">Get BestSellers!</button>
+
+    </div> -->
+<!-- </div> -->
+
+<!-- Useful links:
+    Highlight a clicked row: http://stackoverflow.com/questions/19331779/how-to-highlight-a-selected-row-in-ngrepeat
+
+-->
+
 <table class="table table-hover">
     <thead>
         <tr>
@@ -10,7 +25,7 @@
     </thead>
     <tbody ng-repeat="extension in model.getExtensionDetails()">
     <tr >
-        <td ng-click="hidden = !hidden"> {{ extension.name }}</td>
+        <td ng-click="hidden = !hidden"><a href="#/details/123"> {{ extension.name }}</td>
         <td ng-click="hidden = !hidden"> {{ extension.groupID }}  </td>
         <td ng-click="hidden = !hidden"> {{ extension.artifactID }}  </td>
         <td ng-click="hidden = !hidden"> {{ extension.releaseID }}  </td>
@@ -26,15 +41,15 @@
                         <th>Profile</th>
                         <th>Configuration</th>
                     </tr>
-                </thead>
-                <tr ng-repeat="version in extension.versions" >
-                    <td> {{ version.version }}</td>
-                    <td>{{ version.instance }}</td>
-                    <td>{{ version.profile }}</td>
-                    <td>{{ version.configuration }}</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
+                    </thead>
+                    <tr ng-repeat="version in extension.versions" >
+                        <td> {{ version.version }}</td>
+                        <td>{{ version.instance }}</td>
+                        <td>{{ version.profile }}</td>
+                        <td>{{ version.configuration }}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
     </tbody>
 </table>
