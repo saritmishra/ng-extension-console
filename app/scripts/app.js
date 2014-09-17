@@ -21,6 +21,12 @@ angular
                 templateUrl: "views/createExtension.html",
                 controller: "createExtensionController"
             })
+            .when("/details/?(?:appID)?", {
+                // Check how to do ID thing - until then, regex matching there for testing
+                // http://blog.hfarazm.com/angularjs-routeparams/
+                templateUrl: "views/viewExtensionDetails.html",
+                controller: "viewExtensionsController"
+            })
             .otherwise({
                 redirectTo: "/view"
             });
