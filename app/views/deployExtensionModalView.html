@@ -1,12 +1,33 @@
 <div class="modal-header">
-    <h3 class="modal-title">Im a modal!</h3>
+    <h3 class="modal-title">Deploy a new instance...</h3>
 </div>
 <div class="modal-body">
     <ul>
-        <li>{{ extension.name }}</li>
-        <li>{{ extension.groupID }}</li>
-        <li>{{ extension.artifactID }}</li>
-        <li>{{ extension.releaseID }}</li>
+        <li>
+            <div class="form-group">
+            <label for="name">Extension Name</label>
+            <input type="text" class="form-control" id="name" placeholder="{{ extension.name }}" readonly="true">
+            </div>
+        </li>
+        <li>
+            <div class="form-group">
+            <label for="groupID">Group ID</label>
+            <input type="text" class="form-control" id="groupID" placeholder="{{ extension.groupID }}" readonly="true">
+            </div>
+        </li>
+        <li>
+            <div class="form-group">
+            <label for="artifactID">Artifact ID</label>
+            <input type="text" class="form-control" id="artifactID" placeholder="{{ extension.artifactID }}" readonly="true">
+            </div>
+        </li>
+        <li>
+            <div class="form-group">
+            <label for="releaseID">Release ID</label>
+            <input type="text" class="form-control" id="releaseID" placeholder="{{ extension.releaseID }}" readonly="true">
+            </div>
+        </li>
+
         <li>
             <div class="form-group has-feedback">
             <label for="version">Version</label>
