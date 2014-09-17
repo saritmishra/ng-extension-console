@@ -20,13 +20,36 @@
             <th>Release ID</th>
         </tr>
     </thead>
-    <tr ng-repeat="extension in model.getExtensionDetails()">
-        <td ng-dblclick="model.getExtensionDetails(extension)"> {{ extension.name }}  </td>
-        <td ng-dblclick="model.getExtensionDetails(extension)"> {{ extension.groupID }}  </td>
-        <td ng-dblclick="model.getExtensionDetails(extension)"> {{ extension.artifactID }}  </td>
-        <td ng-dblclick="model.getExtensionDetails(extension)"> {{ extension.releaseID }}  </td>
+    <tbody ng-repeat="extension in model.getExtensionDetails()">
+    <tr >
+        <td ng-click="hidden =! hidden"> {{ extension.name }}</td>
+        <td ng-click="hidden =! hidden"> {{ extension.groupID }}  </td>
+        <td ng-click="hidden =! hidden"> {{ extension.artifactID }}  </td>
+        <td ng-click="hidden =! hidden"> {{ extension.releaseID }}  </td>
     </tr>
+    <tr ng-show="hidden">
+        <td colspan="4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Deployed Instance</th>
+                        <th>Profile</th>
+                        <th>Configuration</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="version in extension.versions" >
+                    <td> {{ version.version }}</td>
+                    <td>{{ version.instance }}</td>
+                    <td>{{ version.profile }}</td>
+                    <td>{{ version.configuration }}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    </tbody>
 </table>
+
 
 <!--  <pager total-items="model.totalItems" items-per-page="20" ng-model="model.currentPage" ng-click="model.fetchBestSellersNextPage()"></pager>
 

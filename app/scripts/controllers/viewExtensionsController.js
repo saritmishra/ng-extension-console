@@ -12,6 +12,7 @@
             // model.totalItems = 0;
             // model.copyright = "";
             // model.rating ="2";
+        $scope.hidden = false;
 
         model.getExtensionDetails = function(extension) {
             return extensionConsoleFactory.extensionList;
