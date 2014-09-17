@@ -10,6 +10,10 @@
     </div> -->
 <!-- </div> -->
 
+<!-- Useful links:
+    Highlight a clicked row: http://stackoverflow.com/questions/19331779/how-to-highlight-a-selected-row-in-ngrepeat
+
+-->
 
 <table class="table table-hover">
     <thead>
@@ -21,32 +25,33 @@
         </tr>
     </thead>
     <tbody ng-repeat="extension in model.getExtensionDetails()">
-    <tr >
-        <td ng-click="hidden =! hidden"> {{ extension.name }}</td>
-        <td ng-click="hidden =! hidden"> {{ extension.groupID }}  </td>
-        <td ng-click="hidden =! hidden"> {{ extension.artifactID }}  </td>
-        <td ng-click="hidden =! hidden"> {{ extension.releaseID }}  </td>
-    </tr>
-    <tr ng-show="hidden">
-        <td colspan="4">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Version</th>
-                        <th>Deployed Instance</th>
-                        <th>Profile</th>
-                        <th>Configuration</th>
+        <tr>
+            <td ng-click="hidden =! hidden"><a href="#/details/123"> {{ extension.name }} </a></td>
+            <td ng-click="hidden =! hidden"> {{ extension.groupID }}  </td>
+            <td ng-click="hidden =! hidden"> {{ extension.artifactID }}  </td>
+            <td ng-click="hidden =! hidden"> {{ extension.releaseID }}  </td>
+        </tr>
+        <!-- table below expands when a row is clicked -->
+        <tr ng-show="hidden">
+            <td colspan="4">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Version</th>
+                            <th>Deployed Instance</th>
+                            <th>Profile</th>
+                            <th>Configuration</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="version in extension.versions" >
+                        <td> {{ version.version }}</td>
+                        <td>{{ version.instance }}</td>
+                        <td>{{ version.profile }}</td>
+                        <td>{{ version.configuration }}</td>
                     </tr>
-                </thead>
-                <tr ng-repeat="version in extension.versions" >
-                    <td> {{ version.version }}</td>
-                    <td>{{ version.instance }}</td>
-                    <td>{{ version.profile }}</td>
-                    <td>{{ version.configuration }}</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
+                </table>
+            </td>
+        </tr>
     </tbody>
 </table>
 
