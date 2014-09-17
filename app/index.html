@@ -8,7 +8,19 @@
 </head>
 
 <body>
-    <div class="container">  
+
+    <!-- Setting up a tabbed nav-bar to traverse different options -->
+<!--     <tabset>
+        <tab select="model.viewExtensions()">
+            <tab-heading>View Extensions</tab-heading>
+        </tab>
+        <tab select="model.createExtension()">
+            <tab-heading>Create Extension</tab-heading>
+        </tab>
+    </tabset>
+ -->
+    <div class="container">
+
         <!-- Navigation Bar
           Medallia Logo (jump to Express) - Hive Link - Search
         -->
@@ -41,9 +53,9 @@
         <div class="page-header">
           <h1>EXM Console <small>Makes Your Life Easier</small></h1>
         </div>
-        
-        <!-- Global tabs 
-        TODO - Fix isActive so that it actually highlight the active tab! 
+
+        <!-- Global tabs
+        TODO - Fix isActive so that it actually highlight the active tab!
         http://stackoverflow.com/questions/16199418/how-do-i-implement-the-bootstrap-navbar-active-class-with-angular-js/18071388#18071388
         -->
         <ul class="nav nav-pills">
@@ -63,18 +75,8 @@
             </li>
         </ul>
     </div>
-    
-    <br>
 
-    <!-- Setting up a tabbed nav-bar to traverse different options -->
-<!--     <tabset>
-        <tab select="model.viewExtensions()">
-            <tab-heading>View Extensions</tab-heading>
-        </tab>
-        <tab select="model.createExtension()">
-            <tab-heading>Create Extension</tab-heading>
-        </tab>
-    </tabset> -->
+    <br>
 
     <div class="container" ng-view=""></div>
 
@@ -86,9 +88,6 @@
     <script type="text/javascript" src="scripts/services/extensionConsoleFactory.js"></script>
     <script type="text/javascript" src="scripts/controllers/viewExtensionsController.js"></script>
     <script type="text/javascript" src="scripts/controllers/createExtensionController.js"></script>
-
-    <!-- <script type="text/javascript" src="scripts/directives/rating.js"></script> -->
-
 
 </body>
 </html>
