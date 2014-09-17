@@ -27,29 +27,28 @@
             <input type="text" class="form-control" id="releaseID" placeholder="{{ extension.releaseID }}" readonly="true">
             </div>
         </li>
-
         <li>
             <div class="form-group has-feedback">
-            <label for="version">Version</label>
-            <input type="text" class="form-control" id="version" placeholder="Enter Version" ng-model="extension.version">
+            <label for="version">Extension Version</label>
+            <input type="text" class="form-control" id="version" placeholder="Specify extension version" ng-model="extension.version">
             </div>
         </li>
         <li>
             <div class="form-group has-feedback">
-            <label for="instance">instance</label>
-            <input type="text" class="form-control" id="instance" placeholder="Enter instance" ng-model="extension.instance">
+            <label for="instance">Deploy on instance</label>
+            <input type="text" class="form-control" id="instance" placeholder="Specify instance on which the extension will be deployed" ng-model="extension.instance">
             </div>
         </li>
         <li>
             <div class="form-group has-feedback">
-            <label for="profile">profile</label>
-            <input type="text" class="form-control" id="profile" placeholder="Enter profile" ng-model="extension.profile">
+            <label for="profile">Configuration Profile</label>
+            <input type="text" class="form-control" id="profile" placeholder="Specify profile such as PROD, QA or something else" ng-model="extension.profile">
             </div>
         </li>
         <li>
             <div class="form-group has-feedback">
-            <label for="configuration">configuration</label>
-            <input type="text" class="form-control" id="configuration" placeholder="Enter configuration" ng-model="extension.configuration">
+            <label for="configuration">Configuration</label>
+            <textarea class="form-control" placeholder="Specify configuration details here"></textarea>
             </div>
         </li>
     </ul>

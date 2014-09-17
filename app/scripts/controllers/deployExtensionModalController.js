@@ -2,7 +2,7 @@
 (function () {
     "use strict";
 
-    var deployExtensionModalController = function ($scope, extensionConsoleFactory, $modalInstance, extension) {
+    var deployExtensionModalController = function ($scope,  $modalInstance, extension) {
 
         $scope.extension = extension;
 
@@ -16,5 +16,5 @@
 
     };
 
-    angular.module("extensionConsole").controller("deployExtensionModalController", [ "$scope", "extensionConsoleFactory", "$modalInstance", "extension", deployExtensionModalController]);
+    angular.module("extensionConsole").controller("deployExtensionModalController", [ "$scope", "$modalInstance", "extension", deployExtensionModalController]);
 }());
