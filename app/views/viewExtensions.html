@@ -5,14 +5,16 @@
             <th>Group ID</th>
             <th>Artifact ID</th>
             <th>Release ID</th>
+            <th></th>
         </tr>
     </thead>
     <tbody ng-repeat="extension in model.getExtensionDetails()">
     <tr >
-        <td ng-click="hidden =! hidden"> {{ extension.name }}</td>
-        <td ng-click="hidden =! hidden"> {{ extension.groupID }}  </td>
-        <td ng-click="hidden =! hidden"> {{ extension.artifactID }}  </td>
-        <td ng-click="hidden =! hidden"> {{ extension.releaseID }}  </td>
+        <td ng-click="hidden = !hidden"> {{ extension.name }}</td>
+        <td ng-click="hidden = !hidden"> {{ extension.groupID }}  </td>
+        <td ng-click="hidden = !hidden"> {{ extension.artifactID }}  </td>
+        <td ng-click="hidden = !hidden"> {{ extension.releaseID }}  </td>
+        <td><button class="btn btn-default ">Deploy an instance</button></td>
     </tr>
     <tr ng-show="hidden">
         <td colspan="4">
