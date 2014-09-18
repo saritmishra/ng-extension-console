@@ -1,82 +1,39 @@
-<!-- <div> Extra div added to add the default display:block behavior around the enclosed div -->
-<!--     <div class="col-md-6 col-md-offset-3 form-inline main-dropdown">
-        <select ng-model="model.selectedCategory" ng-options="category.list_name for category in model.categories" class="dropdown-toggle form-control">
-                <option value="">-- choose category --</option>
-        </select>
-        <button ng-click="model.fetchBestSellers()" class="btn btn-default form-control">Get BestSellers!</button>
-
-    </div> -->
-<!-- </div> -->
-
 <!-- Useful links:
     Highlight a clicked row: http://stackoverflow.com/questions/19331779/how-to-highlight-a-selected-row-in-ngrepeat
 
 -->
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Extension Name</th>
-            <th>Group ID</th>
-            <th>Artifact ID</th>
-            <th>Release ID</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody ng-repeat="extension in model.getExtensionDetails()">
-    <tr >
-        <td ng-click="hidden = !hidden"><a href="#/details/123"> {{ extension.name }}</td>
-        <td ng-click="hidden = !hidden"> {{ extension.groupID }}  </td>
-        <td ng-click="hidden = !hidden"> {{ extension.artifactID }}  </td>
-        <td ng-click="hidden = !hidden"> {{ extension.releaseID }}  </td>
-        <td><button class="btn btn-default " ng-click="model.extensionToDeploy = extension; openDeployModal()">Deploy an instance</button></td>
-    </tr>
-    <tr ng-show="hidden">
-        <td colspan="4">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Version</th>
-                        <th>Deployed Instance</th>
-                        <th>Profile</th>
-                        <th>Configuration</th>
-                    </tr>
-                    </thead>
-                    <tr ng-repeat="version in extension.versions" >
-                        <td> {{ version.version }}</td>
-                        <td>{{ version.instance }}</td>
-                        <td>{{ version.profile }}</td>
-                        <td>{{ version.configuration }}</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<!-- <h2>Recently deployed instances</h2>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th>Extension Name</th>
-        <th>Group ID</th>
-        <th>Artifact ID</th>
-        <th>Release ID</th>
-        <th>Version</th>
-        <th>Deployed Instance</th>
-        <th>Profile</th>
-        <th>Configuration</th>
-    </tr>
-    </thead>
-    <tr>
-        <td> {{ deployedExtension.name }}</td>
-        <td> {{ deployedExtension.groupID }}</td>
-        <td> {{ deployedExtension.artifactID }}</td>
-        <td> {{ deployedExtension.releaseID }}</td>
-        <td> {{ deployedExtension.version }}</td>
-        <td>{{ deployedExtension.instance }}</td>
-        <td>{{ deployedExtension.profile }}</td>
-        <td>{{ deployedExtension.configuration }}</td>
-    </tr>
-</table> -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+              <a ng-repeat="extension in model.extensions" class="list-group-item">
+                <div ng-click="$parent.hidden=true; $parent.clicked=extension">{{extension.extensionName}}</div>
+              </a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div ng-show="hidden">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3>{{clicked.extensionName}}
+                        <button type="button" class="close" ng-click="hidden=false">
+                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                    </h3>   
+                </div>
+                <ul class="list-group">
+                    <li ng-repeat="version in clicked.versions" class="list-group-item">
+                        <!-- <div ng-click=""> -->
+                            {{version.version}}
+                        <!-- </div> -->
+                            <a href="{{version.document.url}}" data-toggle="tooltip" title="Hive">
+                                <i class="glyphicon glyphicon-book pull-right"></i>
+                            </a>
+                            <!-- <button class="btn btn-default" ng-click="model.extensionToDeploy = extension; openDeployModal()">
+                            Deploy an instance</button> -->
+                    </li>
+                </ul>
+            </div>
+        </div>  
+    </div>
+</div>

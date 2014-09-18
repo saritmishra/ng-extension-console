@@ -8,21 +8,9 @@
 </head>
 
 <body>
-
-    <!-- Setting up a tabbed nav-bar to traverse different options -->
-<!--     <tabset>
-        <tab select="model.viewExtensions()">
-            <tab-heading>View Extensions</tab-heading>
-        </tab>
-        <tab select="model.createExtension()">
-            <tab-heading>Create Extension</tab-heading>
-        </tab>
-    </tabset>
- -->
     <div class="container">
-
         <!-- Navigation Bar
-          Medallia Logo (jump to Express) - Hive Link - Search
+          Medallia Logo (jump to Express) - Hive Link (about custom app)- Search
         -->
         <div class="navbar navbar-default navbar-fixed-top">
           <div class="container">
@@ -32,8 +20,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <!-- Add Medallia logo below -->
-              <a class="navbar-brand" href="#"></a>
+              <a class="navbar-brand" href="http://www.medallia.com">
+                <img src="medallia_logo.png" alt="Medallia">
+              </a>
               <div class="col-xs-5 col-sm-3 pull-right">
                 <form class="navbar-form" role="search">
                   <div class="input-group">
@@ -59,7 +48,7 @@
         http://stackoverflow.com/questions/16199418/how-do-i-implement-the-bootstrap-navbar-active-class-with-angular-js/18071388#18071388
         -->
         <ul class="nav nav-pills">
-            <li ng-class="{ active: isActive('/create') }"><a href="#/create">Create Extension</a></li>
+            <li ng-class="{ active: isActive('/create') }"><a href="#/create">Register Extension</a></li>
             <li ng-class="{ active: isActive('/view') }"><a href="#/view">View Extensions</a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
