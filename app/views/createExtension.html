@@ -1,8 +1,7 @@
-
 <!--
-  Some useful links:
-  http://stackoverflow.com/questions/18838964/add-bootstrap-glyphicon-to-input-box
+  createExtension.html
 -->
+<h3>Register Maven Extension</h3>
 <form role="form" ng-submit="createSubmit()" class="well col-md-6" >
   <div class="form-group required has-feedback">
     <label for="extensionName">Extension Name</label>
@@ -10,21 +9,24 @@
     <i class="glyphicon glyphicon-asterisk form-control-feedback"></i>
   </div>
   <div class="form-group required has-feedback">
-    <label for="groupID required">Group ID</label>
-    <input type="text" class="form-control" id="groupID" placeholder="Enter Group ID" ng-model="extension.groupID">
+    <label for="groupId required">Group ID</label>
+    <input type="text" class="form-control" id="groupId" placeholder="Enter Group ID" ng-model="extension.groupID">
     <i class="glyphicon glyphicon-asterisk form-control-feedback"></i>
   </div>
   <div class="form-group required has-feedback">
-    <label for="artifactID required">Artifact ID</label>
-    <input type="text" class="form-control" id="artifactID" placeholder="Enter Artifact ID" ng-model="extension.artifactID">
+    <label for="artifactId required">Artifact ID</label>
+    <input type="text" class="form-control" id="artifactId" placeholder="Enter Artifact ID" ng-model="extension.artifactID">
     <i class="glyphicon glyphicon-asterisk form-control-feedback"></i>
   </div>
+  <!-- User won't be able to change this field because for now,
+   we now we only register MAVEN release project 
+  -->
   <fieldset disabled>
     <div class="form-group required has-feedback">
-      <label for="releaseID">Release ID</label>
-      <input type="text" class="form-control" id="releaseID" placeholder="release" ng-model="extension.releaseID">
+      <label for="releaseId">Release ID</label>
+      <input type="text" class="form-control" id="releaseId" placeholder="release" ng-model="extension.releaseID">
       <i class="glyphicon glyphicon-asterisk form-control-feedback"></i>
     </div>
   </fieldset>
-  <button type="submit" class="btn btn-primary pull-right" >Submit</button>
+  <button type="submit" class="btn btn-primary pull-right">Register!</button>
 </form>

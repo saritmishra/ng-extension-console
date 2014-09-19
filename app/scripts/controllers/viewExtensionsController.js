@@ -2,14 +2,13 @@
 (function () {
     "use strict";
 
-    var viewExtensionsController = function ($scope, extensionConsoleFactory, $modal, $log) {
+    var viewExtensionsController = function ($scope, extensionConsoleFactory, $modal, $log, $location) {
 
         var model = $scope.model = {};
-            model.extensions = [];
         $scope.hidden = false;
 
         model.getExtensions = function() {
-            model.extensions = extensionConsoleFactory.hardcodedExtensionList;
+            return extensionConsoleFactory.hardcodedExtensionList;
             // return extensionConsoleFactory.getExtensionList()
             //             .get(function(results) {
             //                 model.extensions = results.results;
@@ -17,7 +16,16 @@
         };
 
         model.getConfigurations = function(appName, version) {
+            // return extensionConsoleFactory.getConfigurations()
+            //             .get(function(results) {
+                        
+            //             });
             return extensionConsoleFactory.hardcodedConfigurationList;
+        };
+
+        model.syncExtensions = function() {
+            console.log("blah!");
+            extensionConsoleFactory.syncAllExtensions();
         };
 
         // S E T T I N G    U P   T H E   D E P L O Y   M O D A L   W I N D O W
@@ -42,9 +50,19 @@
             });
         };
         // S E T T I N G    U P   T H E   D E P L O Y   M O D A L   W I N D O W
-        
+
+        // HELPER FUNCTIONS
+        $scope.selectRow = function(row) {
+            $scope.selectedRow = row;
+        };
+
+        $scope.isActive = function (viewLocation) {
+            console.log("here i am");
+            var active = (viewLocation === $location.path());
+            return active;
+        };
+
         var init = function() {
-            model.getExtensions();
             // model.getExtensionDetails().$promise //this is calling model.getCategories() first, before handing over the $promise
             //     .then(function() {
             //         // model.selectedCategory = model.categories[0]; // This will update the drop-down when the page loads.
@@ -57,5 +75,5 @@
         init();
     };
 
-    angular.module("extensionConsole").controller("viewExtensionsController", [ "$scope", "extensionConsoleFactory", "$modal", "$log", viewExtensionsController]);
+    angular.module("extensionConsole").controller("viewExtensionsController", [ "$scope", "extensionConsoleFactory", "$modal", "$log", "$location", viewExtensionsController]);
 }());

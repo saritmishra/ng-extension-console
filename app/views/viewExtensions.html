@@ -1,14 +1,20 @@
 <!-- Useful links:
     Highlight a clicked row: http://stackoverflow.com/questions/19331779/how-to-highlight-a-selected-row-in-ngrepeat
-
 -->
 
 <div class="row">
     <div class="col-md-6">
         <div class="list-group">
-              <a ng-repeat="extension in model.extensions" class="list-group-item">
-                <div ng-click="$parent.hidden=true; $parent.clicked=extension">{{extension.extensionName}}</div>
-              </a>
+            
+            <!-- Create a dynamic search box (see examples below):
+            https://docs.angularjs.org/api/ng/directive/ngRepeat
+            -->
+            <input type="text" ng-model="query" class="form-control" placeholder="Browse an app" name="srch-term" id="srch-term">
+            <br>
+
+            <a ng-repeat="extension in model.getExtensions() | filter:query" class="list-group-item" ng-click="$parent.hidden=true; $parent.clicked=extension; selectRow($index)" ng-class="{active : $index==selectedRow}">
+                {{extension.extensionName}}
+            </a>
         </div>
     </div>
     <div class="col-md-6">
@@ -16,16 +22,14 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3>{{clicked.extensionName}}
-                        <button type="button" class="close" ng-click="hidden=false">
+                        <button type="button" class="close" ng-click="hidden=false; selectedRow=undefined">
                             <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                         </button>
                     </h3>   
                 </div>
                 <ul class="list-group">
                     <li ng-repeat="version in clicked.versions" class="list-group-item">
-                        <!-- <div ng-click=""> -->
                             {{version.version}}
-                        <!-- </div> -->
                             <a href="{{version.document.url}}" data-toggle="tooltip" title="Hive">
                                 <i class="glyphicon glyphicon-book pull-right"></i>
                             </a>

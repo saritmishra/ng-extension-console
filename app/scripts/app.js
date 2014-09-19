@@ -27,6 +27,10 @@ angular
                 templateUrl: "views/viewExtensionDetails.html",
                 controller: "viewExtensionsController"
             })
+            .when("/manage", {
+                templateUrl: "views/manageExtension.html",
+                controller: "viewExtensionsController"
+            })
             .otherwise({
                 redirectTo: "/view"
             });

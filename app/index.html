@@ -7,11 +7,11 @@
     <link rel="icon" type="image/png" href="favicon.gif">
 </head>
 
+<!-- Maybe useful links:
+    http://stackoverflow.com/questions/16199418/how-do-i-implement-the-bootstrap-navbar-active-class-with-angular-js/18071388#18071388
+-->
 <body>
     <div class="container">
-        <!-- Navigation Bar
-          Medallia Logo (jump to Express) - Hive Link (about custom app)- Search
-        -->
         <div class="navbar navbar-default navbar-fixed-top">
           <div class="container">
             <div class="navbar-header">
@@ -21,7 +21,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="http://www.medallia.com">
-                <img src="medallia_logo.png" alt="Medallia">
+                <img src="img/medallia_logo.png" alt="Medallia">
               </a>
               <div class="col-xs-5 col-sm-3 pull-right">
                 <form class="navbar-form" role="search">
@@ -40,21 +40,16 @@
         <br>
 
         <div class="page-header">
-          <h1>EXM Console <small>Makes Your Life Easier</small></h1>
+          <h1>MES Console <small>Makes Your Life Easier</small></h1>
         </div>
 
-        <!-- Global tabs
-        TODO - Fix isActive so that it actually highlight the active tab!
-        http://stackoverflow.com/questions/16199418/how-do-i-implement-the-bootstrap-navbar-active-class-with-angular-js/18071388#18071388
-        -->
-        <ul class="nav nav-pills">
-            <li ng-class="{ active: isActive('/create') }"><a href="#/create">Register Extension</a></li>
+        <ul class="nav nav-pills" ng-controller="viewExtensionsController">
             <li ng-class="{ active: isActive('/view') }"><a href="#/view">View Extensions</a></li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Tools<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
+                    <li><a href="#/create">Register Extension</a></li>
+                    <li><a href="#/manage">Manage Extension</a></li>
                     <li><a href="#">Something else here</a></li>
                     <li class="divider"></li>
                     <li><a href="#">Separated link</a></li>

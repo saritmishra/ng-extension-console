@@ -17,13 +17,18 @@
             return $resource("/getAllExtensions");
         };
 
-        factory.getConfigurationList = function () {
-
+        factory.getConfigurationList = function (appName, version) {
+            return factory.hardcodedConfigurationList;
+            // return $resource("/getConfigurations/:appName/:version");
         };
 
         // POST /extension/register/{extensionName}
         factory.addExtension = function(extension){
-            factory.extensionList.push(extension);
+            factory.hardcodedExtensionList.push(extension);
+        };
+
+        // GET /extension/sync
+        factory.syncAllExtensions = function() {
         };
 
         return factory;
