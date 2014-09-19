@@ -7,20 +7,49 @@
         var model = $scope.model = {};
         $scope.hidden = false;
         model.configPropertyList = {};
-        model.updatedConfigPropertyList = {};
+
 
         model.getExtensionDetails = function(extension) {
             return extensionConsoleFactory.extensionList;
         };
 
-        var trial = function() {
-            var testData = {
-                  username: 'sarit',
-                  firstName: 'sarit',
-                  lastName: 'mishra'
-            };
-            extensionConsoleFactory.saveConfiguration(testData);
-        }; trial();
+        // var trial = function() {
+        //     var testData = [
+        //                              { "name": "Prop1", "value" : "Some Value" },
+        //                              { "name": "Prop2", "value" : "Some Other" },
+        //                              { "name": "Prop4", "value" : "New Value 2" },
+        //                              { "name": "Prop5", "value" : "New Value 2" }
+        //                             ];
+
+        //     extensionConsoleFactory.saveConfiguration(testData);
+        // }; trial();
+
+        // S E T T I N G   U P   C O N F I G   E N T R Y   M O D A L   W I N D O W
+        $scope.openConfigEntryModal = function (extension) {
+            var modalInstance = $modal.open({
+              templateUrl: "views/configEntryView.html",
+              controller: "configEntryModalController",
+              resolve: { //making sure these are available to the modal controller
+                propertyList: function () {
+                    return extensionConsoleFactory.getConfigPropertyList();
+                                // To be used when an actual $http.get is done -
+                                // .success(function(data, status, headers, config){
+                                //     model.configPropertyList = data;
+                                //     return data;
+                                // });
+                }
+              }
+            });
+
+            return modalInstance.result.then(function (updatedConfigPropertyList) {
+              //OK clicked on modal
+              extensionConsoleFactory.saveConfiguration(updatedConfigPropertyList, extension.name);
+            }, function () {
+              //modal dismissed
+              $log.info("configEntry modal dismissed at: " + new Date());
+            });
+        };
+
 
         // S E T T I N G    U P   T H E   D E P L O Y   M O D A L   W I N D O W
         $scope.openDeployModal = function () {
@@ -35,7 +64,7 @@
               }
             });
 
-            modalInstance.result.then(function (deployedExtension) { // how about putting a return in front
+            return modalInstance.result.then(function (deployedExtension) {
               //OK clicked on modal
               $scope.deployedExtension = deployedExtension;
             }, function () {
@@ -43,32 +72,6 @@
               $log.info("Deploy modal dismissed at: " + new Date());
             });
         }; // S E T T I N G    U P   T H E   D E P L O Y   M O D A L   W I N D O W
-
-
-        // S E T T I N G   U P   C O N F I G   E N T R Y   M O D A L   W I N D O W
-        $scope.openConfigEntryModal = function () {
-            var modalInstance = $modal.open({
-              templateUrl: "views/configEntryView.html",
-              controller: "configEntryModalController",
-              resolve: { //making sure these are available to the modal controller
-                propertyList: function () {
-                    return extensionConsoleFactory.getConfigPropertyList()
-                                .success(function(data, status, headers, config){
-                                    model.configPropertyList = data;
-                                    return data;
-                                });
-                }
-              }
-            });
-
-            modalInstance.result.then(function (updatedConfigPropertyList) { // how about putting a return in front
-              //OK clicked on modal
-              model.updatedConfigPropertyList = updatedConfigPropertyList;
-            }, function () {
-              //modal dismissed
-              $log.info("configEntry modal dismissed at: " + new Date());
-            });
-        };
 
         //
         // model.getCategories = function() {

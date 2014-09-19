@@ -11,18 +11,22 @@
     app.use(express.static(__dirname, "/"));
     app.use(bodyParser.json()); // to parse the request body that gets POSTed to Node
 
-    app.post('/saveConfig', function(req, res) {
+// Saving configuration for (extension-name, version, profile)
+    app.post('/saveConfig/:extensionName/:version/:profile', function(req, res) {
+        console.log("begin post...");
+        console.log(JSON.stringify(req.body));
         request({
-            uri: "http://requestb.in/16noz291",
+            // uri: "http://requestb.in/16noz291",
+            uri: "http://localhost:9090/medallia-extension-manager-configuration-service/configure/"+req.params.extensionName + "/" +req.params.version + "/" + req.params.profile,
             method: "POST",
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(req.body)
         }, function(error, response, body){
             // console.log("response is:" + body);
-            // console.log(response.statusCode);
+            console.log(response.statusCode);
+            console.log(body);
             res.send(body);
         });
-
     });
 
    // app.get("/getCategories", function(req, res) {
