@@ -57,8 +57,9 @@
                                                 }
                                             ]
 
-        factory.addExtension = function(extension){
-            factory.extensionList.push(extension);
+        factory.registerExtension = function(extension){
+            // factory.extensionList.push(extension);
+            return $http.post("/registerExtension/", JSON.stringify(extension));
         };
 
         // Will require a GET to a service built by Kaya
@@ -93,7 +94,7 @@
             // return $resource("/saveConfig" + )
             console.log("Posting to node..." + JSON.stringify(newConfig));
             return $http.post("/saveConfig/"+ extensionName+"/1.0/PROD", JSON.stringify(newConfig));
-                // .success(function(data, status, headers, config) {
+                // .success(function(data, status, headers, config) { // This belongs in the controller
                 //     console.log("$http returns:" + data);
                 // })
                 // .error(function(data) {

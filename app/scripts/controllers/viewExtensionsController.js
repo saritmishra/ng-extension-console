@@ -8,7 +8,6 @@
         $scope.hidden = false;
         model.configPropertyList = {};
 
-
         model.getExtensionDetails = function(extension) {
             return extensionConsoleFactory.extensionList;
         };

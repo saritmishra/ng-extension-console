@@ -4,25 +4,25 @@
   http://stackoverflow.com/questions/18838964/add-bootstrap-glyphicon-to-input-box
 
 -->
-<form role="form" ng-submit="createSubmit()" class="well col-md-6" >
+<form role="form" ng-submit="registerSubmit()" class="well col-md-6" >
   <div class="form-group has-feedback">
     <label for="extensionName">Extension Name</label>
-    <input type="text" class="form-control" id="extensionName" placeholder="Enter Extension Name" ng-model="extension.name">
+    <input type="text" class="form-control" id="extensionName" placeholder="Enter Extension Name" ng-model="extension.extensionName">
     <!-- <i class="glyphicon glyphicon-user form-control-feedback"></i> -->
   </div>
   <div class="form-group has-feedback">
     <label for="groupID">Group ID</label>
-    <input type="text" class="form-control" id="groupID" placeholder="Enter Group ID" ng-model="extension.groupID">
+    <input type="text" class="form-control" id="groupID" placeholder="Enter Group ID" ng-model="extension.groupId">
     <!-- <i class="glyphicon glyphicon-music form-control-feedback"></i> -->
   </div>
   <div class="form-group has-feedback">
     <label for="artifactID">Artifact ID</label>
-    <input type="text" class="form-control" id="artifactID" placeholder="Enter Artifact ID" ng-model="extension.artifactID">
+    <input type="text" class="form-control" id="artifactID" placeholder="Enter Artifact ID" ng-model="extension.artifactId">
     <!-- <i class="glyphicon glyphicon-music form-control-feedback"></i> -->
   </div>
   <div class="form-group has-feedback">
-    <label for="releaseID">Release ID</label>
-    <input type="text" class="form-control" id="releaseID" placeholder="Enter Release ID" ng-model="extension.releaseID">
+    <label for="repositoryID">Repository ID</label>
+    <input type="text" class="form-control" id="repositoryID" placeholder="Enter Repository ID" ng-model="extension.repositoryId">
     <!-- <i class="glyphicon glyphicon-music form-control-feedback"></i> -->
   </div>
   <button type="submit" class="btn btn-primary pull-right" >Submit</button>
