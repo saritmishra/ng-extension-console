@@ -6,6 +6,8 @@
 
         var model = $scope.model = {};
         $scope.hidden = false;
+        model.configPropertyList = {};
+        model.updatedConfigPropertyList = {};
 
         model.getExtensionDetails = function(extension) {
             return extensionConsoleFactory.extensionList;
@@ -28,7 +30,7 @@
               // size: "small",
               resolve: { //making sure these are available to the modal controller
                 extension: function () {
-                    return model.extensionToDeploy; //
+                    return model.extensionToDeploy;
                 }
               }
             });
@@ -50,14 +52,18 @@
               controller: "configEntryModalController",
               resolve: { //making sure these are available to the modal controller
                 propertyList: function () {
-                    return extensionConsoleFactory.getConfigPropertyList();
+                    return extensionConsoleFactory.getConfigPropertyList()
+                                .success(function(data, status, headers, config){
+                                    model.configPropertyList = data;
+                                    return data;
+                                });
                 }
               }
             });
 
-            modalInstance.result.then(function (updatedPropertyList) { // how about putting a return in front
+            modalInstance.result.then(function (updatedConfigPropertyList) { // how about putting a return in front
               //OK clicked on modal
-              $scope.updatedPropertyList = updatedPropertyList;
+              model.updatedConfigPropertyList = updatedConfigPropertyList;
             }, function () {
               //modal dismissed
               $log.info("configEntry modal dismissed at: " + new Date());

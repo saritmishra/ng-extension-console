@@ -21,16 +21,27 @@
             factory.extensionList.push(extension);
         };
 
-        factory.getConfigPropertyList = function(){
-            return factory.configPropertyList;
+        factory.getConfigPropertyList = function(){ // R E T U R N   T H E   P R O M I S E
+            // return factory.configPropertyList;
+            return $http.get('/getSomething');
+            // .success(function(data, status, headers, config){
+            //     console.log(data); //set data to factory variable
+            // })
+            // .error(function(data){
+            //     console.log("Error in GET: " + data);
+            // });
+
         };
 
-        factory.saveConfiguration = function(newConfig){
+        factory.saveConfiguration = function(newConfig){ // R E T U R N   T H E   P R O M I S E
             // return $resource("/saveConfig" + )
-            $http.post('/saveConfig/', JSON.stringify(newConfig))
-                .success(function(data, status, headers, config) {
-                    console.log("$http returns:" + data);
-                });
+            return $http.post('/saveConfig/', JSON.stringify(newConfig));
+                // .success(function(data, status, headers, config) {
+                //     console.log("$http returns:" + data);
+                // })
+                // .error(function(data) {
+                //     console.log("Error in POST: " + data);
+                // });
         };
         // factory.getBestSellers = function(category, offset){
         //     return $resource("/getBestSellers/" + category + "/" + offset);
