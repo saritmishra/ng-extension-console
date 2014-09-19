@@ -1,59 +1,64 @@
 <div class="modal-header">
-    <h3 class="modal-title">Deploy a new instance...</h3>
+    <h3 class="modal-title">Prepare configuration...</h3>
 </div>
 <div class="modal-body">
+    <form class="form-horizontal" role="form">
 
-
-            <div class="form-group">
-            <label for="name">Extension Name</label>
-            <input type="text" class="form-control" id="name" placeholder="{{ extension.name }}" readonly="true">
+        <div class="form-group" ng-repeat="property in propertyList">
+            <label for="name" class="col-md-2"> {{ property.propertyName }} </label> {{ model.showRequired() }}
+            <div class="col-md-10"> <!-- For some reason, this class cannot be applied on the input tag -->
+                <!-- property.propertyType should be text, number or radio (will require some more work) -->
+                <input type="{{ property.propertyType }}" class="form-control" id="name" placeholder="{{ property.defaultValue }}" ng-model="property.value">
             </div>
+        </div>
 
 
-            <div class="form-group">
-            <label for="groupID">Group ID</label>
-            <input type="text" class="form-control" id="groupID" placeholder="{{ extension.groupID }}" readonly="true">
+   <!--      <div class="form-group">
+            <label for="groupID" class="col-md-2">Group ID</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="groupID" placeholder="{{ extension.groupID }}" readonly="true">
             </div>
-
-
-            <div class="form-group">
-            <label for="artifactID">Artifact ID</label>
-            <input type="text" class="form-control" id="artifactID" placeholder="{{ extension.artifactID }}" readonly="true">
+        </div>
+        <div class="form-group">
+            <label for="artifactID" class="col-md-2">Artifact ID</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="artifactID" placeholder="{{ extension.artifactID }}" readonly="true">
             </div>
-
-
-            <div class="form-group">
-            <label for="releaseID">Release ID</label>
-            <input type="text" class="form-control" id="releaseID" placeholder="{{ extension.releaseID }}" readonly="true">
+        </div>
+        <div class="form-group">
+            <label for="releaseID" class="col-md-2">Release ID</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="releaseID" placeholder="{{ extension.releaseID }}" readonly="true">
             </div>
-
-
-            <div class="form-group has-feedback">
-            <label for="version">Extension Version</label>
-            <input type="text" class="form-control" id="version" placeholder="Specify extension version" ng-model="extension.version">
+        </div>
+        <div class="form-group has-feedback">
+            <label for="version" class="col-md-2">Extension Version</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="version" placeholder="Specify extension version" ng-model="extension.version">
             </div>
-
-
-            <div class="form-group has-feedback">
-            <label for="instance">Deploy on instance</label>
-            <input type="text" class="form-control" id="instance" placeholder="Specify instance on which the extension will be deployed" ng-model="extension.instance">
+        </div>
+        <div class="form-group has-feedback">
+            <label for="instance" class="col-md-2">Deploy on instance</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="instance" placeholder="Specify instance on which the extension will be deployed" ng-model="extension.instance">
             </div>
-
-
-            <div class="form-group has-feedback">
-            <label for="profile">Configuration Profile</label>
-            <input type="text" class="form-control" id="profile" placeholder="Specify profile such as PROD, QA or something else" ng-model="extension.profile">
+        </div>
+        <div class="form-group has-feedback">
+            <label for="profile" class="col-md-2">Configuration Profile</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="profile" placeholder="Specify profile such as PROD, QA or something else" ng-model="extension.profile">
             </div>
-
-
-            <div class="form-group has-feedback">
-            <label for="configuration">Configuration</label>
-            <textarea class="form-control" placeholder="Specify configuration details here"></textarea>
-            </div>
-
-
+        </div>
+        <div class="form-group has-feedback">
+            <label for="configuration" class="col-md-2">Configuration</label>
+            <div class="col-md-10">
+                <textarea class="form-control" placeholder="Specify configuration details here"></textarea>
+           </div>
+        </div> -->
+    </form>
 </div>
+
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-primary" ng-click="ok()">Save</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>

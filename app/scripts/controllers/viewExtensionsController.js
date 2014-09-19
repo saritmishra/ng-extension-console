@@ -11,6 +11,14 @@
             return extensionConsoleFactory.extensionList;
         };
 
+        var trial = function() {
+            var testData = {
+                  username: 'sarit',
+                  firstName: 'sarit',
+                  lastName: 'mishra'
+            };
+            extensionConsoleFactory.saveConfiguration(testData);
+        }; trial();
 
         // S E T T I N G    U P   T H E   D E P L O Y   M O D A L   W I N D O W
         $scope.openDeployModal = function () {
@@ -35,6 +43,28 @@
         }; // S E T T I N G    U P   T H E   D E P L O Y   M O D A L   W I N D O W
 
 
+        // S E T T I N G   U P   C O N F I G   E N T R Y   M O D A L   W I N D O W
+        $scope.openConfigEntryModal = function () {
+            var modalInstance = $modal.open({
+              templateUrl: "views/configEntryView.html",
+              controller: "configEntryModalController",
+              resolve: { //making sure these are available to the modal controller
+                propertyList: function () {
+                    return extensionConsoleFactory.getConfigPropertyList();
+                }
+              }
+            });
+
+            modalInstance.result.then(function (updatedPropertyList) { // how about putting a return in front
+              //OK clicked on modal
+              $scope.updatedPropertyList = updatedPropertyList;
+            }, function () {
+              //modal dismissed
+              $log.info("configEntry modal dismissed at: " + new Date());
+            });
+        };
+
+        //
         // model.getCategories = function() {
         //     return bestSellerFactory.getCategories()
         //                 .get(function(results) {
