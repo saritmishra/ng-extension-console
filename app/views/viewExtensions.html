@@ -12,7 +12,7 @@
             <input type="text" ng-model="query" class="form-control" placeholder="Browse an app" name="srch-term" id="srch-term">
             <br>
 
-            <a ng-repeat="extension in model.getExtensions() | filter:query" class="list-group-item" ng-click="$parent.hidden=true; $parent.clicked=extension; selectRow($index)" ng-class="{active : $index==selectedRow}">
+            <a ng-repeat="extension in extensions | filter:query" class="list-group-item" ng-click="$parent.hidden=true; $parent.clicked=extension; selectRow($index)" ng-class="{active : $index==selectedRow}">
                 {{extension.extensionName}}
             </a>
         </div>

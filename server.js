@@ -1,14 +1,17 @@
-/* global console, require, __dirname */
 
-(function() {
-    "use strict";
+    // SET UP =======================
+    var express = require('express');
+    var request = require('request');
+    var bodyParser = require('body-parser');
 
-    var express = require("express"),
-        app = express(),
-        request = require("request"),
-        host = "http://localhost:8080";
+    var app = express();
 
-    app.use(express.static(__dirname, "/"));
+    var appRepoApiUrl = 'http://localhost:9090/custom-apps-repository/api/extension';
+
+    // CONFIGURATION =======================
+    app.use(express.static(__dirname, '/'));
+    app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
+    app.use(bodyParser.json());                                     // parse application/json
 
     // app.get("/getBestSellers/:category/:offset", function(req, res) {
     //     var bestSellers = {},
@@ -27,21 +30,29 @@
     //         res.send(bestSellers);
     //     });
     // });
-
-    app.get("/getAllExtensions", function(req,res) {
-        var extensions = {};
-        
+    
+    // ROUTES =======================================
+    // Tutorials: http://www.sitepoint.com/making-http-requests-in-node-js/
+    app.get('/getAllExtensions', function(req,res) {
         console.log("Getting all the extensions from Extension Service...");
         request({
-            uri: "/custom-apps-repository/api/extension/all",
+            uri: appRepoApiUrl + '/all',
             method: "GET"
-        }, function (error, response, body) {
-            extensions = body;
-            res.send(extensions);
+        }, function(error, response, body) {
+            console.log(response.request.href  + " ===> " + response.statusCode);
+            res.send(body);
         });
     });
 
-    app.listen(9000);
+    app.get(
+    );
 
-    console.log("Express listening on port 9000");
-}());
+
+    // APPLICATION ================================
+    app.get('*', function(req, res) {
+        res.sendfile('./app/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+    });
+
+    // listen (start app with node server.js) ====
+    app.listen(8080);
+    console.log("Express listening on port 8080");

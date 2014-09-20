@@ -75,5 +75,7 @@
         init();
     };
 
-    angular.module("extensionConsole").controller("viewExtensionsController", [ "$scope", "extensionConsoleFactory", "$modal", "$log", "$location", viewExtensionsController]);
+    angular.module("extensionConsole")
+            .controller("viewExtensionsController",
+                [ "$scope", "extensionConsoleFactory", "$modal", "$log", "$location", '$http', '$routeParams', viewExtensionsController]);
 }());

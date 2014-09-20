@@ -5,6 +5,13 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     <link rel="icon" type="image/png" href="favicon.gif">
+
+    <script type="text/javascript" src="lib/angular.js"></script>
+    <script type="text/javascript" src="lib/angular-resource.js"></script>
+    <script type="text/javascript" src="lib/angular-route.js"></script>
+    <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.11.0.js"></script>
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <script type="text/javascript" src="scripts/controllers/controllers.js"></script>
 </head>
 
 <!-- Maybe useful links:
@@ -43,14 +50,13 @@
           <h1>MES Console <small>Makes Your Life Easier</small></h1>
         </div>
 
-        <ul class="nav nav-pills" ng-controller="viewExtensionsController">
+        <ul class="nav nav-pills" ng-controller="BaseCtrl">
             <li ng-class="{ active: isActive('/view') }"><a href="#/view">View Extensions</a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Tools<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#/create">Register Extension</a></li>
                     <li><a href="#/manage">Manage Extension</a></li>
-                    <li><a href="#">Something else here</a></li>
                     <li class="divider"></li>
                     <li><a href="#">Separated link</a></li>
                     <li class="divider"></li>
@@ -63,17 +69,6 @@
     <br>
 
     <div class="container" ng-view=""></div>
-
-    <script type="text/javascript" src="lib/angular.js"></script>
-    <script type="text/javascript" src="lib/angular-resource.js"></script>
-    <script type="text/javascript" src="lib/angular-route.js"></script>
-    <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.11.0.js"></script>
-    <script type="text/javascript" src="scripts/app.js"></script>
-    <script type="text/javascript" src="scripts/services/extensionConsoleFactory.js"></script>
-    <script type="text/javascript" src="scripts/controllers/viewExtensionsController.js"></script>
-    <script type="text/javascript" src="scripts/controllers/createExtensionController.js"></script>
-    <script type="text/javascript" src="scripts/controllers/deployExtensionModalController.js"></script>
-
 
 </body>
 </html>
