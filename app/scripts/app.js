@@ -20,6 +20,10 @@ phonecatApp.config(['$routeProvider',
         templateUrl: 'views/createExtension.html',
         controller: 'ExtListCtrl'
       }).
+      when('/manage', {
+        templateUrl: 'views/manageExtension.html',
+        controller: 'ManageExtCtrl'
+      }).
       otherwise({
         redirectTo: '/view'
       });

@@ -3,6 +3,7 @@
     var express = require('express');
     var request = require('request');
     var bodyParser = require('body-parser');
+    var fs = require('fs');
 
     var app = express();
 
@@ -34,19 +35,40 @@
     // ROUTES =======================================
     // Tutorials: http://www.sitepoint.com/making-http-requests-in-node-js/
     app.get('/getAllExtensions', function(req,res) {
+        var extensions = {};
+
         console.log("Getting all the extensions from Extension Service...");
         request({
             uri: appRepoApiUrl + '/all',
             method: "GET"
         }, function(error, response, body) {
-            console.log(response.request.href  + " ===> " + response.statusCode);
-            res.send(body);
+            if (!error) {
+                console.log(response.request.href  + " ===> " + response.statusCode);
+                extensions = body;
+            } else {
+                console.log(error);
+            }
+            res.send(extensions);
         });
     });
 
-    app.get(
-    );
-
+    app.get('/syncExtensions', function(req,res) {
+        var result = '';
+        console.log("Sync with Nexus to update Extension Service...");
+        request({
+            uri: appRepoApiUrl + '/sync',
+            method: "GET"
+        }, function(error, response, body) {
+            if (!error) {
+                resultCode = response.statusCode;
+                console.log(response.request.href  + " ===> " + resultCode);
+                result = resultCode;
+            } else {
+                console.log(error);
+            }
+            res.send(result);
+        });
+    });
 
     // APPLICATION ================================
     app.get('*', function(req, res) {

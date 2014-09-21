@@ -9,26 +9,26 @@
             <!-- Create a dynamic search box (see examples below):
             https://docs.angularjs.org/api/ng/directive/ngRepeat
             -->
-            <input type="text" ng-model="query" class="form-control" placeholder="Browse an app" name="srch-term" id="srch-term">
+            <input type="text" ng-model="search.extensionName" class="form-control" placeholder="Browse an app" name="srch-term" id="srch-term">
             <br>
 
-            <a ng-repeat="extension in extensions | filter:query" class="list-group-item" ng-click="$parent.hidden=true; $parent.clicked=extension; selectRow($index)" ng-class="{active : $index==selectedRow}">
+            <a ng-repeat="extension in extensions | filter:search" class="list-group-item" ng-click="$parent.hideDetails = false; highlightRow($index, extension)" ng-class="{active : $index==selectedRow}">
                 {{extension.extensionName}}
             </a>
         </div>
     </div>
     <div class="col-md-6">
-        <div ng-show="hidden">
+        <div ng-show="hideDetails">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3>{{clicked.extensionName}}
-                        <button type="button" class="close" ng-click="hidden=false; selectedRow=undefined">
+                    <h3>{{clickedExtension.extensionName}}
+                        <button type="button" class="close" ng-click="hideDetails=false; selectedRow=undefined">
                             <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                         </button>
                     </h3>   
                 </div>
                 <ul class="list-group">
-                    <li ng-repeat="version in clicked.versions" class="list-group-item">
+                    <li ng-repeat="version in clickedExtension.versions" class="list-group-item">
                             {{version.version}}
                             <a href="{{version.document.url}}" data-toggle="tooltip" title="Hive">
                                 <i class="glyphicon glyphicon-book pull-right"></i>

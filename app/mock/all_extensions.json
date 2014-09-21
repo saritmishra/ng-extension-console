@@ -10,20 +10,10 @@
     "repositoryId": "releases"
   },
   {
-    "inserted": 1395350577969,
-    "updated": 1395350577969,
-    "extensionName": "commons-config",
-    "repositoryType": "MAVEN",
-    "versions": [],
-    "groupId": "com.medallia.apps",
-    "artifactId": "commons-config",
-    "repositoryId": "releases"
-  },
-  {
-    "inserted": null,
-    "updated": null,
+    "inserted": 1395347533730,
+    "updated": 1395347533730,
     "extensionName": "app_name",
-    "repositoryType": null,
+    "repositoryType": "MAVEN",
     "versions": [
       {
         "inserted": null,
@@ -37,6 +27,19 @@
           "url": "http://hive.medallia.com/my_first_app"
         }
       }
-    ]
+    ],
+    "groupId": "",
+    "artifactId": "",
+    "repositoryId": ""
+  },
+  {
+    "inserted": 1395350577969,
+    "updated": 1395350577969,
+    "extensionName": "commons-config",
+    "repositoryType": "MAVEN",
+    "versions": [],
+    "groupId": "com.medallia.apps",
+    "artifactId": "commons-config",
+    "repositoryId": "releases"
   }
 ]

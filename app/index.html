@@ -52,11 +52,11 @@
 
         <ul class="nav nav-pills" ng-controller="BaseCtrl">
             <li ng-class="{ active: isActive('/view') }"><a href="#/view">View Extensions</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Tools<span class="caret"></span></a>
+            <li ng-class= "{ active: isDropdownMenuItem()} " class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{selectedItem}} <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#/create">Register Extension</a></li>
-                    <li><a href="#/manage">Manage Extension</a></li>
+                    <li ng-class="{ active: isActive('/create') }"><a href="#/create">Register Extension</a></li>
+                    <li ng-class="{ active: isActive('/manage') }"><a href="#/manage">Manage Extension</a></li>
                     <li class="divider"></li>
                     <li><a href="#">Separated link</a></li>
                     <li class="divider"></li>
