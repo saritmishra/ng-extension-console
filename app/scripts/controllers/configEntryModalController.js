@@ -16,7 +16,7 @@
                 newObj.name = updatedList[i].propertyName;
                 newObj.value = updatedList[i].value;
                 newArray.push(newObj);
-            };
+            }
 
           $modalInstance.close(newArray);
         };
@@ -27,5 +27,8 @@
 
     };
 
-    angular.module("extensionConsole").controller("configEntryModalController", [ "$scope", "$modalInstance", "propertyList", configEntryModalController]);
+    angular.module("extensionConsole")
+      .controller("configEntryModalController",
+        [ "$scope", "$modalInstance", "propertyList", configEntryModalController]
+      );
 }());

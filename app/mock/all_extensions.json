@@ -1,0 +1,45 @@
+[
+  {
+    "inserted": 1395273380261,
+    "updated": 1395273380261,
+    "extensionName": "jobs-lexus-response-pdf-export",
+    "repositoryType": "MAVEN",
+    "versions": [],
+    "groupId": "com.medallia.apps",
+    "artifactId": "jobs-lexus-response-pdf-export",
+    "repositoryId": "releases"
+  },
+  {
+    "inserted": 1395347533730,
+    "updated": 1395347533730,
+    "extensionName": "app_name",
+    "repositoryType": "MAVEN",
+    "versions": [
+      {
+        "inserted": null,
+        "updated": null,
+        "rowVersion": 1,
+        "extension": null,
+        "version": "1.0",
+        "document": {
+          "inserted": null,
+          "updated": null,
+          "url": "http://hive.medallia.com/my_first_app"
+        }
+      }
+    ],
+    "groupId": "",
+    "artifactId": "",
+    "repositoryId": ""
+  },
+  {
+    "inserted": 1395350577969,
+    "updated": 1395350577969,
+    "extensionName": "commons-config",
+    "repositoryType": "MAVEN",
+    "versions": [],
+    "groupId": "com.medallia.apps",
+    "artifactId": "commons-config",
+    "repositoryId": "releases"
+  }
+]

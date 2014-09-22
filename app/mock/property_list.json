@@ -1,0 +1,14 @@
+[
+    {
+        "propertyName": "email-To",
+        "propertyType": "String",
+        "nullable": true,
+        "defaultValue": ""
+    },
+    {
+        "propertyName": "email-subject",
+        "propertyType": "String",
+        "nullable": false,
+        "defaultValue": ""
+    }
+]

@@ -1,18 +1,46 @@
-<!-- <div> Extra div added to add the default display:block behavior around the enclosed div -->
-<!--     <div class="col-md-6 col-md-offset-3 form-inline main-dropdown">
-        <select ng-model="model.selectedCategory" ng-options="category.list_name for category in model.categories" class="dropdown-toggle form-control">
-                <option value="">-- choose category --</option>
-        </select>
-        <button ng-click="model.fetchBestSellers()" class="btn btn-default form-control">Get BestSellers!</button>
-
-    </div> -->
-<!-- </div> -->
-
 <!-- Useful links:
     Highlight a clicked row: http://stackoverflow.com/questions/19331779/how-to-highlight-a-selected-row-in-ngrepeat
+    Create a dynamic search box (see examples below): https://docs.angularjs.org/api/ng/directive/ngRepeat
 
 -->
 
+<div class="row">
+    <div class="col-md-6">
+        <input type="text" ng-model="search.extensionName" class="form-control" placeholder="Browse an app" name="srch-term" id="srch-term">
+        <br>
+        <div class="list-group">
+            <a ng-repeat="extension in model.extensionList | filter:search" class="list-group-item" ng-click="displayDetails($index, extension)" ng-class="{active : $index==selectedRow}">
+                {{extension.extensionName}}
+            </a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div ng-show="show">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3>{{clickedExtension.extensionName}}
+                        <button type="button" class="close" ng-click="closeDetails()">
+                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                    </h3>   
+                </div>
+                <ul class="list-group">
+                    <li ng-repeat="version in clickedExtension.versions" class="list-group-item">
+                            {{version.version}}
+                            <button class="btn btn-sm btn-default " ng-click="openConfigEntryModal(clickedExtension.extensionName, version.version)">Configure instance</button>
+                            <span class="pull-right">
+                                <a href="{{version.document.url}}" target="_blank" data-toggle="tooltip" title="Hive">
+                                    <i class="glyphicon glyphicon-book"></i>
+                                </a>
+                            </span>
+                    </li>
+                </ul>
+            </div>
+        </div>  
+    </div>
+</div>
+
+<!--
 <table class="table table-hover">
     <thead>
         <tr>
@@ -23,9 +51,9 @@
             <th></th>
         </tr>
     </thead>
-    <tbody ng-repeat="extension in model.getExtensionDetails()">
+    <tbody ng-repeat="extension in model.getExtensionDetails() track by $index">
     <tr >
-        <td ng-click="hidden = !hidden"><a href="#/details/123"> {{ extension.name }}</td>
+        <td ng-click="hidden = !hidden"><a href="#/details/123"> {{ extension.extensioName }}</td>
         <td ng-click="hidden = !hidden"> {{ extension.groupID }}  </td>
         <td ng-click="hidden = !hidden"> {{ extension.artifactID }}  </td>
         <td ng-click="hidden = !hidden"> {{ extension.releaseID }}  </td>
@@ -53,30 +81,4 @@
         </tr>
     </tbody>
 </table>
-
-<!-- <h2>Recently deployed instances</h2>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th>Extension Name</th>
-        <th>Group ID</th>
-        <th>Artifact ID</th>
-        <th>Release ID</th>
-        <th>Version</th>
-        <th>Deployed Instance</th>
-        <th>Profile</th>
-        <th>Configuration</th>
-    </tr>
-    </thead>
-    <tr>
-        <td> {{ deployedExtension.name }}</td>
-        <td> {{ deployedExtension.groupID }}</td>
-        <td> {{ deployedExtension.artifactID }}</td>
-        <td> {{ deployedExtension.releaseID }}</td>
-        <td> {{ deployedExtension.version }}</td>
-        <td>{{ deployedExtension.instance }}</td>
-        <td>{{ deployedExtension.profile }}</td>
-        <td>{{ deployedExtension.configuration }}</td>
-    </tr>
-</table> -->
+-->

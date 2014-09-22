@@ -2,14 +2,25 @@
 (function () {
     "use strict";
 
+    /** Help:
+    http://stackoverflow.com/questions/13088153/how-to-http-synchronous-call-with-angularjs
+    https://groups.google.com/forum/#!topic/angular/qagzXXhS_VI/discussion
+    http://stackoverflow.com/questions/21239266/angularjs-using-q-to-fire-ajax-calls-synchronously
+    **/
+
     var viewExtensionsController = function ($scope, extensionConsoleFactory, $modal, $log) {
 
         var model = $scope.model = {};
-        $scope.hidden = false;
-        model.configPropertyList = {};
+        $scope.show = false;
+        model.extensionList = [];
+        model.configPropertyList = [];
 
-        model.getExtensionDetails = function(extension) {
-            return extensionConsoleFactory.extensionList;
+        // Get all the extensions
+        model.getAllExtensions = function() {
+            extensionConsoleFactory.getExtensionList()
+                        .success(function(data){
+                            model.extensionList = data;
+                        });
         };
 
         // var trial = function() {
@@ -23,102 +34,74 @@
         //     extensionConsoleFactory.saveConfiguration(testData);
         // }; trial();
 
-        // S E T T I N G   U P   C O N F I G   E N T R Y   M O D A L   W I N D O W
-        $scope.openConfigEntryModal = function (extension) {
-            var modalInstance = $modal.open({
-              templateUrl: "views/configEntryView.html",
-              controller: "configEntryModalController",
-              resolve: { //making sure these are available to the modal controller
-                propertyList: function () {
-                    return extensionConsoleFactory.getConfigPropertyList();
-                                // To be used when an actual $http.get is done -
-                                // .success(function(data, status, headers, config){
-                                //     model.configPropertyList = data;
-                                //     return data;
-                                // });
-                }
-              }
-            });
-
-            return modalInstance.result.then(function (updatedConfigPropertyList) {
-              //OK clicked on modal
-              extensionConsoleFactory.saveConfiguration(updatedConfigPropertyList, extension.name);
-            }, function () {
-              //modal dismissed
-              $log.info("configEntry modal dismissed at: " + new Date());
-            });
+        $scope.displayDetails = function(rowIndex, extension) {
+            // Used to highlight the selected row
+            $scope.selectedRow = rowIndex;
+            // Used in "details"
+            $scope.show = true;
+            $scope.clickedExtension = extension;
         };
 
+        $scope.closeDetails = function() {
+            $scope.show = false;
+            $scope.selectedRow=undefined;
+        };
 
-        // S E T T I N G    U P   T H E   D E P L O Y   M O D A L   W I N D O W
-        $scope.openDeployModal = function () {
-            var modalInstance = $modal.open({
-              templateUrl: "views/deployExtensionModalView.html",
-              controller: "deployExtensionModalController",
-              // size: "small",
-              resolve: { //making sure these are available to the modal controller
-                extension: function () {
-                    return model.extensionToDeploy;
-                }
-              }
-            });
+        // S E T T I N G   U P   C O N F I G   E N T R Y   M O D A L   W I N D O W
+        $scope.openConfigEntryModal = function (extensionName, versionId) {
+            // Need to make sure to get list of config properties before doing anything
+            extensionConsoleFactory.getConfigPropertyList(extensionName, versionId)
+                .then(function(response) {
+                    model.configPropertyList = response.data;
 
-            return modalInstance.result.then(function (deployedExtension) {
-              //OK clicked on modal
-              $scope.deployedExtension = deployedExtension;
-            }, function () {
-              //modal dismissed
-              $log.info("Deploy modal dismissed at: " + new Date());
-            });
-        }; // S E T T I N G    U P   T H E   D E P L O Y   M O D A L   W I N D O W
+                    var modalInstance = $modal.open({
+                      templateUrl: "views/configEntryView.html",
+                      controller: "configEntryModalController",
+                      resolve: { //making sure these are available to the modal controller
+                        propertyList: function() {
+                            return model.configPropertyList;
+                        }
+                      }
+                    });
 
-        //
-        // model.getCategories = function() {
-        //     return bestSellerFactory.getCategories()
-        //                 .get(function(results) {
-        //                     model.categories = results.results;
-        //                 });
+                    return modalInstance.result.then(function (updatedConfigPropertyList) {
+                      //OK clicked on modal
+                      extensionConsoleFactory.saveConfiguration(updatedConfigPropertyList, extensionName);
+                    }, function () {
+                      //modal dismissed
+                      $log.info("configEntry modal dismissed at: " + new Date());
+                    });
+                
+                });
+        };
+
+        // // S E T T I N G    U P   T H E   D E P L O Y   M O D A L   W I N D O W
+        // $scope.openDeployModal = function () {
+        //     var modalInstance = $modal.open({
+        //       templateUrl: "views/deployExtensionModalView.html",
+        //       controller: "deployExtensionModalController",
+        //       // size: "small",
+        //       resolve: { //making sure these are available to the modal controller
+        //         extension: function () {
+        //             return model.extensionToDeploy;
+        //         }
+        //       }
+        //     });
+
+        //     return modalInstance.result.then(function (deployedExtension) {
+        //       //OK clicked on modal
+        //       $scope.deployedExtension = deployedExtension;
+        //     }, function () {
+        //       //modal dismissed
+        //       $log.info("Deploy modal dismissed at: " + new Date());
+        //     });
         // };
 
-        // model.getDetail = function (book, detail) {
-        //     return book.book_details[0][detail];
-        // };
 
-        // model.fetchBestSellers = function() {
-        //     model.currentPage = 1;
-        //     model.getDataFor(model.selectedCategory.list_name, model.currentPage);
-        // };
-
-        // model.fetchBestSellersNextPage = function() {
-        //     model.getDataFor(model.selectedCategory.list_name, model.currentPage);
-        // };
-
-        // model.getDataFor = function (category, offset) {
-        //     if (!category)
-        //         return;
-        //     model.personalRatings = [];
-        //     category = category.split(" ").join("-");
-
-        //     offset = (offset) ? (offset - 1) * 20 : 1;
-
-        //     bestSellerFactory.getBestSellers(category, offset)
-        //        .get(function (results) {
-        //            model.bestSellers = results.results;
-        //            model.copyright = results.copyright;
-        //            model.totalItems = results.num_results;
-        //        });
-        // };
-
-        // var init = function() {
-        //     model.getCategories().$promise //this is calling model.getCategories() first, before handing over the $promise
-        //         .then(function() {
-        //             model.selectedCategory = model.categories[0]; // This will update the drop-down when the page loads.
-        //             model.fetchBestSellers();
-        //         // },function (reason) {
-        //         //     console.log("Sorry, failed :" + reason);
-        //         });
-        // };
-        // init();
+        var init = function() {
+            model.getAllExtensions();
+        };
+        init();
 
     };
 

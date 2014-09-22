@@ -1,0 +1,6 @@
+{
+    "extensionName": "jobs-lexus-rest2express",
+    "groupId": "com.medallia.apps",
+    "artifactId": "jobs-lexus-rest2express",
+    "repositoryId": "releases"
+}
