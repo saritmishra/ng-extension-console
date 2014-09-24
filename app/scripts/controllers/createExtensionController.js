@@ -2,7 +2,7 @@
 (function () {
     "use strict";
 
-    var createExtensionController = function ($scope, extensionConsoleFactory) {
+    var createExtensionController = function ($scope, $location, extensionConsoleFactory) {
 
         var extension = {};
 
@@ -11,11 +11,17 @@
             extension["extensionName"] = $scope.extensionName;
             extension["groupId"] = $scope.groupId;
             extension["artifactId"] = $scope.artifactId;
-            extension["repositoryId"] = $scope.repositoryId;
+            extension["repositoryId"] = "releases";
              
             extensionConsoleFactory.registerExtension(extension)
                 .success(function(data, status, headers, config){
                     console.log("Register request sent successfully");
+                    
+                    // Redirect to /view
+                    $location.path('/view');
+                    
+                    // Force reload
+                    // $window.location.reload();
                  });
         };
 
@@ -23,6 +29,6 @@
 
     angular.module("extensionConsole")
         .controller("createExtensionController",
-            [ "$scope", "extensionConsoleFactory", createExtensionController]
+            [ "$scope", "$location", "extensionConsoleFactory", createExtensionController]
         );
 }());

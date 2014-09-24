@@ -86,8 +86,24 @@
     });
 
     // Get list of config properties 
-    app.get("/getConfigProperties/:appName/:versionId", function(req, res) {
-        // /extension/{extensionName}/{versionId}/configuration
+    app.get("/getConfigProperties/:extensionName/:versionId", function(req, res) {
+        var extensionName = req.params.extensionName;
+        var versionId = req.params.versionId;
+        
+        console.log("Getting config properties for " + extensionName + " (" + versionId + ")");
+        var properties = {};
+        request({
+            uri: appRepoApiBaseUrl + '/' + extensionName + "/" + versionId + "/configuration",
+            method: "GET"
+        }, function(error, response, body) {
+            if (!error) {
+                console.log(response.request.href  + " ===> " + response.statusCode);
+                properties = body;
+            } else {
+                console.log(error);
+            }
+            res.send(properties);
+        });
 
     });
 
@@ -100,7 +116,7 @@
             method: "GET"
         }, function(error, response, body) {
             if (!error) {
-                resultCode = response.statusCode;
+                var resultCode = response.statusCode;
                 console.log(response.request.href  + " ===> " + resultCode);
                 result = resultCode;
             } else {

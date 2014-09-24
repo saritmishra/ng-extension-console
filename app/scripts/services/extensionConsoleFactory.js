@@ -7,20 +7,21 @@
         var factory = {};
 
         factory.registerExtension = function(extension){
+            // // Mock
             // factory.extensionList.push(extension);
             return $http.post("/registerExtension/", JSON.stringify(extension));
         };
 
         factory.getExtensionList = function() {
-            // Mock
-            return $http.get('mock/all_extensions.json');
-            // return $http.get('/getAllExtensions');
+            // // Mock
+            // return $http.get('mock/all_extensions.json');
+            return $http.get('/getAllExtensions');
         };
 
         factory.getConfigPropertyList = function(extensionName, versionId){
-            // Mock 
-            return $http.get('mock/property_list.json');
-            // return $http.get('/getConfigProperties/' + extensionName + '/' + versionId);
+            // // Mock 
+            // return $http.get('mock/property_list.json');
+            return $http.get('/getConfigProperties/' + extensionName + '/' + versionId);
         };
 
         factory.saveConfiguration = function(newConfig, extensionName){

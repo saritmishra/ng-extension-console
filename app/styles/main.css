@@ -119,3 +119,9 @@ body {
     border-bottom: 0;
   }
 }
+
+/* Customized: To create a scrollable Modal */
+.modal .modal-body {
+    max-height: 420px;
+    overflow-y: auto;
+}

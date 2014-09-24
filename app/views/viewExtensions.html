@@ -1,7 +1,7 @@
 <!-- Useful links:
     Highlight a clicked row: http://stackoverflow.com/questions/19331779/how-to-highlight-a-selected-row-in-ngrepeat
     Create a dynamic search box (see examples below): https://docs.angularjs.org/api/ng/directive/ngRepeat
-
+    Selected (checkbox) idea for configuration: http://plnkr.co/edit/ZFRIWOe2HxMq8K11FBk4?p=preview
 -->
 
 <div class="row">
@@ -16,23 +16,28 @@
     </div>
     <div class="col-md-6">
         <div ng-show="show">
-            <div class="panel panel-primary">
+            <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3>{{clickedExtension.extensionName}}
-                        <button type="button" class="close" ng-click="closeDetails()">
-                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                        </button>
-                    </h3>   
+                    <button type="button" class="close" ng-click="closeDetails()">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h3>
+                        <i><small>{{clickedExtension.groupId}}</small></i>
+                        <br>
+                        {{clickedExtension.artifactId}}
+                    </h3>
                 </div>
                 <ul class="list-group">
                     <li ng-repeat="version in clickedExtension.versions" class="list-group-item">
-                            {{version.version}}
-                            <button class="btn btn-sm btn-default " ng-click="openConfigEntryModal(clickedExtension.extensionName, version.version)">Configure instance</button>
-                            <span class="pull-right">
-                                <a href="{{version.document.url}}" target="_blank" data-toggle="tooltip" title="Hive">
-                                    <i class="glyphicon glyphicon-book"></i>
-                                </a>
-                            </span>
+                        {{version.version}} 
+                        <div class="pull-right">
+                            <a href="http://{{version.document.url}}" target="_blank" data-toggle="tooltip" title="Hive">
+                                <i class="btn-xs glyphicon glyphicon-book"></i>
+                            </a>
+                            <i class="btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" title="Configure instance" ng-click="openConfigEntryModal(clickedExtension.extensionName, version.version)"></i>
+<!--                             <button type="button" ng-click="openConfigEntryModal(clickedExtension.extensionName, version.version)" class="pull-right btn btn-xs">Configure instance
+                            </button>
+ -->                        </div>
                     </li>
                 </ul>
             </div>

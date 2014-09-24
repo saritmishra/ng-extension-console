@@ -58,6 +58,9 @@
                       templateUrl: "views/configEntryView.html",
                       controller: "configEntryModalController",
                       resolve: { //making sure these are available to the modal controller
+                        extensionName: function() {
+                            return extensionName;
+                        },
                         propertyList: function() {
                             return model.configPropertyList;
                         }

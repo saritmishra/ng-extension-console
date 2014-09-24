@@ -6,7 +6,6 @@
 
         $scope.propertyList = propertyList;
 
-
         $scope.ok = function () {
            //copy out name, value and create new array of objects
            var updatedList =  $scope.propertyList;

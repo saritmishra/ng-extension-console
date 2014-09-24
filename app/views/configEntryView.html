@@ -1,21 +1,24 @@
 <!--
+    Dynamic validation on ng-repeat: http://scotch.io/tutorials/javascript/building-dynamic-angular-forms-with-ngrepeat-and-ngform
+    TODO: 
+        Add reset: https://docs.angularjs.org/guide/forms
 -->
 <div class="modal-header">
-    <h3 class="modal-title">Prepare configuration...</h3>
+    <h3 class="modal-title">Prepare configuration... </h3>
 </div>
-<div class="modal-body">
-    <form class="form-horizontal" role="form">
-        <div class="form-group" ng-repeat="property in propertyList">
-            <label for="name" class="col-md-2"> {{ property.propertyName }} </label> {{ model.showRequired() }}
-            <div class="col-md-10"> <!-- For some reason, this class cannot be applied on the input tag -->
-                <!-- property.propertyType should be text, number or radio (will require some more work) -->
-                <input type="{{ property.propertyType }}" class="form-control" id="name" placeholder="{{ property.defaultValue }}" ng-model="property.value">
+<form name="configPropForm" role="form" novalidate>
+    <div class="modal-body">
+            <div class="form-group has-feedback" ng-repeat="property in propertyList" ng-class="{ 'has-error' : configPropFieldForm.value.$invalid }">
+                <ng-form="configPropFieldForm">
+                    <label for="name"> {{ property.propertyName }} </label>
+                    <!-- property.propertyType should be text, number or radio (will require some more work) -->
+                    <input type="{{ property.propertyType }}" class="form-control" id="name" placeholder="{{ property.defaultValue }}" ng-model="property.value" ng-required="!{{ property.nullable }}">
+                    <i ng-show="!{{ property.nullable }}" class="glyphicon glyphicon-asterisk form-control-feedback"></i>
+                </ng-form>
             </div>
-        </div>
-    </form>
-</div>
-
-<div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok()">Save</button>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-</div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()" ng-disabled="configPropForm.$invalid">Save</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</form>

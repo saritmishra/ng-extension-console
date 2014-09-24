@@ -24,20 +24,21 @@
 
     angular.module("extensionConsole").controller("baseCtrl", [ "$scope", "$location", "extensionConsoleFactory", baseCtrl]);
 
-    var manageExtCtrl = function ManageExtCtrl($scope, $http) {
+    var manageExtCtrl = function ManageExtCtrl($scope, $window, $http, $log) {
         $scope.syncExtensions = function() {
             $http.get('/syncExtensions').success(function(statusCode){
-                if (statusCode == '200') {
-                    console.log("Successfully synced with Nexus service manually!");
+                if (statusCode == 'OK') {
+                    $log.info("Successfully synced with Nexus service manually!");
                 } else {
-                    console.log("Failed to sync with Nexus service manually..." + statusCode);
+                    $log.info("Failed to sync with Nexus service manually..." + statusCode);
                 }
+                $window.location.reload();
             })
             .error(function(statusCode){
-                console.log('Error: ' + statusCode);
+                $log.info('Error: ' + statusCode);
             });
         };
     };
 
-    angular.module("extensionConsole").controller('manageExtCtrl', ['$scope', '$http', manageExtCtrl]);
+    angular.module("extensionConsole").controller('manageExtCtrl', ['$scope', '$window', '$http', '$log', manageExtCtrl]);
 }());
