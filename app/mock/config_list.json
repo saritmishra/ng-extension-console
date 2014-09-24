@@ -1,0 +1,94 @@
+[
+  {
+    "name": "footerDateStampFormat",
+    "value": "sdfsdfsdf"
+  },
+  {
+    "name": "changeDateStampFormat",
+    "value": "sdfsdfsdf"
+  },
+  {
+    "name": "fileNameDateFormat",
+    "value": "sdfsfdsdf"
+  },
+  {
+    "name": "errorMailSubject",
+    "value": "sdfsdf"
+  },
+  {
+    "name": "successMailSubject",
+    "value": "sadfsdfsd"
+  },
+  {
+    "name": "successMailMsg",
+    "value": "sdfsfdsdf"
+  },
+  {
+    "name": "javaMailTo",
+    "value": "sdfsdfs"
+  },
+  {
+    "name": "javaMailFrom",
+    "value": "sdfsdfsdf"
+  },
+  {
+    "name": "smtpHost",
+    "value": "sdfsdfg"
+  },
+  {
+    "name": "remoteFTPType",
+    "value": "sdfsdsdf"
+  },
+  {
+    "name": "remoteFTPDir",
+    "value": "sdfsfd"
+  },
+  {
+    "name": "remoteFTPHost",
+    "value": "sdfsdf"
+  },
+  {
+    "name": "remoteFTPPassword",
+    "value": "sdfsd"
+  },
+  {
+    "name": "remoteFTPUsername",
+    "value": "sdfs"
+  },
+  {
+    "name": "resourceFolder",
+    "value": "sdf"
+  },
+  {
+    "name": "localArchiveDir",
+    "value": "sdf"
+  },
+  {
+    "name": "localFileDownloadDir",
+    "value": "sdf"
+  },
+  {
+    "name": "expressPastVersionAllEntities",
+    "value": "sdf"
+  },
+  {
+    "name": "expressFileDownloadBaseUrl",
+    "value": "fsd"
+  },
+  {
+    "name": "expressLoginUrl",
+    "value": "fsd"
+  },
+  {
+    "name": "expressPassword",
+    "value": "som"
+  },
+  {
+    "name": "expressUsername",
+    "value": "some"
+  },
+  {
+    "name": "downloadFiles",
+    "value": "sdfsdf"
+  }
+]
