@@ -12,7 +12,7 @@
                 <ng-form="configPropFieldForm">
                     <label for="name"> {{ property.propertyName }} </label>
                     <!-- property.propertyType should be text, number or radio (will require some more work) -->
-                    <input type="{{ property.propertyType }}" class="form-control" id="name" placeholder="{{ property.defaultValue }}" ng-model="property.value" ng-required="!{{ property.nullable }}">
+                    <input type="{{ property.propertyType }}" class="form-control" id="name" placeholder="{{ property.defaultValue }}" ng-model="property.value" ng-required="!{{ property.nullable }}" >
                     <i ng-show="!{{ property.nullable }}" class="glyphicon glyphicon-asterisk form-control-feedback"></i>
                 </ng-form>
             </div>

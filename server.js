@@ -67,6 +67,28 @@
         });
     });
 
+    app.get('/getConfig/:extensionName/:version/:profile', function(req, res) {
+        var extensionName = req.params.extensionName;
+        var version = req.params.version;
+        var profile = req.params.profile;
+
+        console.log("Getting configuration for (" + extensionName + ", " + version + ", " + profile + ")");
+        console.log("begin get...");
+        request({
+            // uri: "http://requestb.in/16noz291",
+            uri: configServiceApiBaseUrl + "/" + extensionName + "/" + version + "/" + profile,
+            method: "GET",
+        }, function(error, response, body){
+            if (!error) {
+                console.log(response.request.href  + " ===> " + response.statusCode);
+                console.log(body);
+            } else {
+                console.log(error);
+            }
+            res.send(body);
+        });
+    });
+    
     // Get all the extensions
     app.get("/getAllExtensions", function(req, res) {
         console.log("Getting all the registered extensions...");

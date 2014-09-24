@@ -24,11 +24,15 @@
             return $http.get('/getConfigProperties/' + extensionName + '/' + versionId);
         };
 
-        factory.saveConfiguration = function(newConfig, extensionName){
+        factory.saveConfiguration = function(newConfig, extensionName, versionId, profile){
             console.log("Posting to node..." + JSON.stringify(newConfig));
-            return $http.post("/saveConfig/"+ extensionName+"/1.0/PROD", JSON.stringify(newConfig));
+            return $http.post("/saveConfig/"+ extensionName+"/" + versionId + "/" + profile, JSON.stringify(newConfig));
         };
 
+        factory.getConfiguration = function(extensionName, versionId, profile){
+            return $http.get("/getConfig/"+ extensionName+"/" + versionId + "/" + profile);
+        };
+        
         return factory;
     };
 

@@ -50,32 +50,52 @@
         // S E T T I N G   U P   C O N F I G   E N T R Y   M O D A L   W I N D O W
         $scope.openConfigEntryModal = function (extensionName, versionId) {
             // Need to make sure to get list of config properties before doing anything
-            extensionConsoleFactory.getConfigPropertyList(extensionName, versionId)
-                .then(function(response) {
-                    model.configPropertyList = response.data;
+        	// TODO: Make this a parameter
+        	var profile = "PROD"
+        	var configuredProperties = {}
+        	extensionConsoleFactory.getConfiguration(extensionName, versionId, profile).
+        		then(function(response) {
+        		if(response.status == 200 && response.data) {
+	        		for(var i=0; i< response.data.length; i++) {
+	        			var property = response.data[i];
+	        			configuredProperties[property.name] = property.value; 
+	        		}
+        		}
+        		$log.info("Already configured properties: " + configuredProperties);
+                extensionConsoleFactory.getConfigPropertyList(extensionName, versionId)
+                    .then(function(response) {
+                        model.configPropertyList = response.data;
+                        for(var i=0; i< model.configPropertyList.length; i++) {
+                        	var configProperty = model.configPropertyList[i];
+                        	configProperty.value = configuredProperties[configProperty.propertyName]
+                        }                        
+                        var modalInstance = $modal.open({
+                          templateUrl: "views/configEntryView.html",
+                          controller: "configEntryModalController",
+                          resolve: { //making sure these are available to the modal controller
+                            extensionName: function() {
+                                return extensionName;
+                            },
+                            propertyList: function() {
+                                return model.configPropertyList;
+                            },
+                            configuredProperties: function() {
+                                return configuredProperties;
+                            }
+                          }
+                        });
 
-                    var modalInstance = $modal.open({
-                      templateUrl: "views/configEntryView.html",
-                      controller: "configEntryModalController",
-                      resolve: { //making sure these are available to the modal controller
-                        extensionName: function() {
-                            return extensionName;
-                        },
-                        propertyList: function() {
-                            return model.configPropertyList;
-                        }
-                      }
+                        return modalInstance.result.then(function (updatedConfigPropertyList) {
+                          //OK clicked on modal
+                          extensionConsoleFactory.saveConfiguration(updatedConfigPropertyList, extensionName, versionId, profile);
+                        }, function () {
+                          //modal dismissed
+                          $log.info("configEntry modal dismissed at: " + new Date());
+                        });
+                    
                     });
-
-                    return modalInstance.result.then(function (updatedConfigPropertyList) {
-                      //OK clicked on modal
-                      extensionConsoleFactory.saveConfiguration(updatedConfigPropertyList, extensionName);
-                    }, function () {
-                      //modal dismissed
-                      $log.info("configEntry modal dismissed at: " + new Date());
-                    });
-                
-                });
+        	});
+        	
         };
 
         // // S E T T I N G    U P   T H E   D E P L O Y   M O D A L   W I N D O W
