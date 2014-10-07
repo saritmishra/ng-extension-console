@@ -10,6 +10,7 @@
 
     var appRepoApiBaseUrl = 'http://localhost:7070/custom-apps-repository/api/extension';
     var configServiceApiBaseUrl = 'http://localhost:9090/medallia-extension-manager-configuration-service/configure';
+	var monitorServiceApiBaseUrl = 'http://localhost:6060/mxm-monitor-service/api/execution';
 
     // CONFIGURATION ==============================================================================
 
@@ -19,6 +20,62 @@
 
     // ROUTES ===================================================================
 
+	// Get execution details for a given extension and executionId 
+	app.get('getExecutionDetails/:extensionName/:executionId', function(req, res){
+		console.log("Getting execution info for " + extensionName + "/" + executionId);
+		console.log("being get...");
+		request({
+            uri: monitorServiceApiBaseUrl + "/" + extensionName + "/" + executionId,
+            method: "GET"
+		}, function(error, response, body){
+			if (!error) {
+                console.log(response.request.href  + " ===> " + response.statusCode);
+                console.log(body);				
+			} else {
+				console.log(error);
+			}
+			res.send(body);
+		});
+		
+	});
+	
+	// Get extension details for a given extension
+	app.get('getExtensionDetails/:extensionName', function(req, res){
+		console.log("Getting extension info for " + extensionName);
+		console.log("being get...");
+		request({
+            uri: appRepoApiBaseUrl + "/" + extensionName,
+            method: "GET"
+		}, function(error, response, body){
+			if (!error) {
+                console.log(response.request.href  + " ===> " + response.statusCode);
+                console.log(body);				
+			} else {
+				console.log(error);
+			}
+			res.send(body);
+		});
+		
+	});
+	
+	// Get execution info for a given extension
+	app.get('/getExecutions/:extensionName', function(req, res) {
+		console.log("Getting execution info for " + extensionName);
+		console.log("being get...");
+		request({
+            uri: monitorServiceApiBaseUrl + "/" + extensionName,
+            method: "GET"
+		}, function(error, response, body){
+			if (!error) {
+                console.log(response.request.href  + " ===> " + response.statusCode);
+                console.log(body);				
+			} else {
+				console.log(error);
+			}
+			res.send(body);
+		});
+	});
+	
     // Register an extension
     app.post('/registerExtension', function(req, res) {
         console.log("Register an extension...");

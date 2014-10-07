@@ -17,6 +17,14 @@ angular
                 templateUrl: "views/viewExtensions.html",
                 controller: "viewExtensionsController"
             })
+			.when("/viewExecution", {
+				templateUrl: "views/viewExecutionInfo.html",
+				controller: "viewExecutionsCtrl"
+			})
+            .when("/showLogDetails/:appName/:executionId", {
+                templateUrl: "views/viewLogDetails.html",
+				controller: "viewExecutionsDetailsCtrl"
+            })
             .when("/register", {
                 templateUrl: "views/createExtension.html",
                 controller: "createExtensionController"

@@ -2,12 +2,12 @@
 (function () {
     "use strict";
 
-    var baseCtrl = function ($scope, $location, extensionConsoleFactory) {
+    var baseCtrl = function ($scope, $location) {
         $scope.isDropdownMenuItem = function() {
             var dropdownMap = {'/register' : 'Register Extension', '/manage' : 'Manage Extension'};
             var currentPath = $location.path();
-
-            if (currentPath != '/view') {
+			
+            if (currentPath != '/view' && currentPath != '/viewExecution' && currentPath.indexOf('/showLogDetails') == -1) {
                 $scope.selectedItem = dropdownMap[currentPath];
                 return true;
             } else {
@@ -18,13 +18,19 @@
 
         $scope.isActive = function (viewLocation) {
             var active = (viewLocation === $location.path());
+			
+			// Hack to highlight "viewExecutions" while showing details
+			if ($location.path().indexOf('/showLogDetails') != -1 && viewLocation == '/viewExecution') {
+				return true;
+			}
+			
             return active;
         };
     };
 
-    angular.module("extensionConsole").controller("baseCtrl", [ "$scope", "$location", "extensionConsoleFactory", baseCtrl]);
+    angular.module("extensionConsole").controller("baseCtrl", [ "$scope", "$location", baseCtrl]);
 
-    var manageExtCtrl = function ManageExtCtrl($scope, $window, $http, $log) {
+    var manageExtCtrl = function ($scope, $window, $http, $log) {
         $scope.syncExtensions = function() {
             $http.get('/syncExtensions').success(function(statusCode){
                 if (statusCode == 'OK') {
@@ -41,4 +47,5 @@
     };
 
     angular.module("extensionConsole").controller('manageExtCtrl', ['$scope', '$window', '$http', '$log', manageExtCtrl]);
+	
 }());

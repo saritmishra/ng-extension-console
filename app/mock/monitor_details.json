@@ -1,0 +1,29 @@
+{
+  "executionId": 6,
+  "reportedDate": 1412087718300,
+  "appName": "seveneleven",
+  "appVersion": "1.5",
+  "executionStatus": "OK",
+  "executionDate": 1412087718076,
+  "details": [
+    "[FG] Starting resource getting",
+    "[FG] Ready to pass this resource to next job",
+    "[FT] Start processing FileResource's...",
+    "[FT] Processing FileResource: MED_SURVEY_RESPONSE_DATA_20140930_654321.txt",
+    "[FT] Transformed FileResource: MED_SURVEY_RESPONSE_DATA_20140930_654321.txt",
+    "[FT] Ready to pass the resources to next job. Resource count: 1",
+    "[CF] Start processing InputStreamResource's...",
+    "[CF] Processing InputStreamResource: MED_SURVEY_RESPONSE_DATA_20140930_654321.txt",
+    "[CF] Added to output BatchResource: MED_SURVEY_RESPONSE_DATA_20140930_654321.txt",
+    "[CF] Added to output BatchResource: MED_SURVEY_RESPONSE_DATA_20140930_654321.txt.md5",
+    "[CF] Ready to pass the resources to next job. Resource count: 1",
+    "[BP] Start processing Resource's...",
+    "[BP] Processing Resource's: [FileResource[name=MED_SURVEY_RESPONSE_DATA_20140930_654321.txt], BaseInputStreamResource[name=MED_SURVEY_RESPONSE_DATA_20140930_654321.txt.md5]]",
+    "[FT] Start processing FileResource's...",
+    "[FT] Processing FileResource: MED_SURVEY_RESPONSE_DATA_20140930_654321.txt",
+    "[FT] Transformed FileResource: MED_SURVEY_RESPONSE_DATA_20140930_654321.txt.pgp",
+    "[FT] Bypassing non FileResource: MED_SURVEY_RESPONSE_DATA_20140930_654321.txt.md5",
+    "[FT] Ready to pass the resources to next job. Resource count: 2",
+    "[BP] Ready to pass the resources to next job. Resource count: 1"
+  ]
+}

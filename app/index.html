@@ -14,6 +14,7 @@
     <script type="text/javascript" src="scripts/services/extensionConsoleFactory.js"></script>
     <script type="text/javascript" src="scripts/controllers/mainController.js"></script>
     <script type="text/javascript" src="scripts/controllers/viewExtensionsController.js"></script>
+	<script type="text/javascript" src="scripts/controllers/executionsController.js"></script>
     <script type="text/javascript" src="scripts/controllers/createExtensionController.js"></script>
     <script type="text/javascript" src="scripts/controllers/deployExtensionModalController.js"></script>
     <script type="text/javascript" src="scripts/controllers/configEntryModalController.js"></script>
@@ -57,6 +58,7 @@
 
         <ul class="nav nav-pills" ng-controller="baseCtrl">
             <li ng-class="{ active: isActive('/view') }"><a href="#/view">View Extensions</a></li>
+			<li ng-class="{ active: isActive('/viewExecution') }"><a href="#/viewExecution">View Executions</a></li>
             <li ng-class= "{ active: isDropdownMenuItem()} " class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{selectedItem}} <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">

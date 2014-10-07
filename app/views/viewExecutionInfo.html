@@ -1,0 +1,55 @@
+<!-- Useful links:
+More on sort! => https://docs.angularjs.org/api/ng/filter/orderBy
+-->
+<div class="panel panel-default">
+	<table class="table table-bordered">
+	    <thead>
+	        <tr class="hover">
+	            <th>Extension Name</th>
+	            <th>Group ID</th>
+	            <th>Artifact ID</th>
+	            <th>Repository ID</th>
+	        </tr>
+	    </thead>
+	    <tbody ng-repeat="extension in model.extensionList track by $index">
+		    <tr class="hover" ng-click="hidden=!hidden; loadExecutionInfo(extension.extensionName, hidden, $index)" ng-class="{active : activeRow[$index]}">
+		        <td>{{extension.extensionName}}</td>
+		        <td>{{extension.groupId}}</td>
+		        <td>{{extension.artifactId}}</td>
+		        <td>{{extension.repositoryId}}</td>
+		    </tr>
+		    <tr ng-show="hidden">
+		        <td colspan="4">
+		            <table class="table table-execution-details">
+		               <thead>
+		                    <tr>
+		                        <th>Execution Date
+									<a class="no-underline-link" href="" ng-click="predicate='executionDate'; reverse=!reverse">
+										<i class="glyphicon glyphicon-sort"></i>
+									</a>
+								</th>
+		                        <th>Version
+									<a class="no-underline-link" href="" ng-click="predicate='appVersion'; reverse=!reverse">
+										<i class="glyphicon glyphicon-sort"></i>
+									</a>
+								</th>
+		                        <th>Status
+									<a class="no-underline-link" href="" ng-click="predicate='executionStatus'; reverse=!reverse">
+										<i class="glyphicon glyphicon-sort"></i>
+									</a>
+								</th>
+		                        <th>Log Details</th>
+		                    </tr>
+	                   </thead>
+	                   <tr ng-repeat="executionItem in model.executionInfoList | orderBy:predicate:reverse">
+	                        <td>{{executionItem.executionDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+	                        <td>{{executionItem.appVersion}}</td>
+	                        <td>{{executionItem.executionStatus}}</td>
+	                        <td class="no-underline-link" data-toggle="tooltip" title="{{executionItem.details}}"><a ng-href="#/showLogDetails/{{executionItem.appName}}/{{executionItem.executionId}}">{{executionItem.details[0]}}</a></td>
+	                   </tr>
+		            </table>
+		        </td>
+		    </tr>
+	    </tbody>
+	</table>
+</div>

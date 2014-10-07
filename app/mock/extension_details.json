@@ -1,0 +1,23 @@
+{
+  "inserted": 1395347533730,
+  "updated": 1395347533730,
+  "extensionName": "My app 2",
+  "repositoryType": "MAVEN",
+  "versions": [
+    {
+      "inserted": null,
+      "updated": null,
+      "rowVersion": 1,
+      "extension": null,
+      "version": "1.0",
+      "document": {
+        "inserted": null,
+        "updated": null,
+        "url": "http://hive.medallia.com/my_first_app"
+      }
+    }
+  ],
+  "groupId": "com.kaya.apps",
+  "artifactId": "jobs-app2-export",
+  "repositoryId": "releases"
+}

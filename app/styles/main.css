@@ -125,3 +125,31 @@ body {
     max-height: 420px;
     overflow-y: auto;
 }
+
+/* Do not want to show all the details in the table - truncate */
+.table-execution-details {
+	width: 100%; 
+	table-layout: fixed;
+	white-space: nowrap; 
+	overflow: hidden;
+}
+
+/* Enable table-hover */
+.table tbody tr.hover:hover {
+	background-color: whiteSmoke;
+}
+
+/* Disable underline */
+.no-underline-link a:hover {
+	text-decoration: none;
+}
+
+/* Add top padding */
+.add-top-padding {
+	padding-top: 40px;
+}
+
+/* Remove border */
+.no-border {
+	border: none;
+}

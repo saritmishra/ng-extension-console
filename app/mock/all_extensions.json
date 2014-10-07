@@ -2,7 +2,7 @@
   {
     "inserted": 1395273380261,
     "updated": 1395273380261,
-    "extensionName": "jobs-lexus-response-pdf-export",
+    "extensionName": "My app 1",
     "repositoryType": "MAVEN",
     "versions": [],
     "groupId": "com.medallia.apps",
@@ -12,7 +12,7 @@
   {
     "inserted": 1395347533730,
     "updated": 1395347533730,
-    "extensionName": "app_name",
+    "extensionName": "My app 2",
     "repositoryType": "MAVEN",
     "versions": [
       {
@@ -28,14 +28,14 @@
         }
       }
     ],
-    "groupId": "",
-    "artifactId": "",
-    "repositoryId": ""
+    "groupId": "com.kaya.apps",
+    "artifactId": "jobs-app2-export",
+    "repositoryId": "releases"
   },
   {
     "inserted": 1395350577969,
     "updated": 1395350577969,
-    "extensionName": "commons-config",
+    "extensionName": "My app 3",
     "repositoryType": "MAVEN",
     "versions": [],
     "groupId": "com.medallia.apps",

@@ -29,61 +29,24 @@
                 </div>
                 <ul class="list-group">
                     <li ng-repeat="version in clickedExtension.versions" class="list-group-item">
-                        {{version.version}} 
-                        <div class="pull-right">
+                        <a href="{{version.document.url}}" target="_blank" data-toggle="tooltip" title="About {{version.version}}">
+							{{version.version}}
+						</a>
+						<button type="button" ng-click="openConfigEntryModal(clickedExtension.extensionName, version.version)" 
+							class="pull-right btn btn-xs" data-toggle="tooltip" title="Configure properties for PROD">
+							PROD
+						</button>
+                        <!-- <div class="pull-right">
                             <a href="http://{{version.document.url}}" target="_blank" data-toggle="tooltip" title="Hive">
                                 <i class="btn-xs glyphicon glyphicon-book"></i>
                             </a>
-                            <i class="btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" title="Configure instance" ng-click="openConfigEntryModal(clickedExtension.extensionName, version.version)"></i>
-<!--                             <button type="button" ng-click="openConfigEntryModal(clickedExtension.extensionName, version.version)" class="pull-right btn btn-xs">Configure instance
-                            </button>
- -->                        </div>
+							<a data-toggle="tooltip" title="Configure instance">
+	                            <i class="btn-xs glyphicon glyphicon-pencil" ng-click="openConfigEntryModal(clickedExtension.extensionName, version.version)"></i>
+							</a>
+                        </div> -->
                     </li>
                 </ul>
             </div>
         </div>  
     </div>
 </div>
-
-<!--
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Extension Name</th>
-            <th>Group ID</th>
-            <th>Artifact ID</th>
-            <th>Release ID</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody ng-repeat="extension in model.getExtensionDetails() track by $index">
-    <tr >
-        <td ng-click="hidden = !hidden"><a href="#/details/123"> {{ extension.extensioName }}</td>
-        <td ng-click="hidden = !hidden"> {{ extension.groupID }}  </td>
-        <td ng-click="hidden = !hidden"> {{ extension.artifactID }}  </td>
-        <td ng-click="hidden = !hidden"> {{ extension.releaseID }}  </td>
-        <td><button class="btn btn-default " ng-click="openConfigEntryModal(extension)">Configure instance</button></td>
-    </tr>
-    <tr ng-show="hidden">
-        <td colspan="4">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Version</th>
-                        <th>Deployed Instance</th>
-                        <th>Profile</th>
-                        <th>Configuration</th>
-                    </tr>
-                    </thead>
-                    <tr ng-repeat="version in extension.versions" >
-                        <td> {{ version.version }}</td>
-                        <td>{{ version.instance }}</td>
-                        <td>{{ version.profile }}</td>
-                        <td>{{ version.configuration }}</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </tbody>
-</table>
--->

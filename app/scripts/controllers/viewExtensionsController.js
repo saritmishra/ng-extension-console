@@ -12,7 +12,9 @@
 
         var model = $scope.model = {};
         $scope.show = false;
+		$scope.activeRow = {};
         model.extensionList = [];
+		model.executionInfoList = [];
         model.configPropertyList = [];
 
         // Get all the extensions
@@ -23,23 +25,17 @@
                         });
         };
 
-        // var trial = function() {
-        //     var testData = [
-        //                              { "name": "Prop1", "value" : "Some Value" },
-        //                              { "name": "Prop2", "value" : "Some Other" },
-        //                              { "name": "Prop4", "value" : "New Value 2" },
-        //                              { "name": "Prop5", "value" : "New Value 2" }
-        //                             ];
-
-        //     extensionConsoleFactory.saveConfiguration(testData);
-        // }; trial();
-
         $scope.displayDetails = function(rowIndex, extension) {
             // Used to highlight the selected row
             $scope.selectedRow = rowIndex;
             // Used in "details"
             $scope.show = true;
-            $scope.clickedExtension = extension;
+			
+			// TODO - Improve! This is to fetch app info (versions etc) when user clicks the row in viewExtensions.html
+			extensionConsoleFactory.getExtensionDetails(extension.extensionName)
+							.success(function(data){
+									$scope.clickedExtension = data;
+							});
         };
 
         $scope.closeDetails = function() {
@@ -55,6 +51,8 @@
         	var configuredProperties = {}
         	extensionConsoleFactory.getConfiguration(extensionName, versionId, profile).
         		then(function(response) {
+				
+				// If getConfiguration returns data, that means there is an exisiting config. 
         		if(response.status == 200 && response.data) {
 	        		for(var i=0; i< response.data.length; i++) {
 	        			var property = response.data[i];
@@ -122,11 +120,12 @@
 
 
         var init = function() {
+			console.log("Initializing... getting all the extensions");
             model.getAllExtensions();
         };
         init();
 
     };
 
-    angular.module("extensionConsole").controller("viewExtensionsController", [ "$scope", "extensionConsoleFactory", "$modal", "$log", viewExtensionsController]);
+    angular.module("extensionConsole").controller("viewExtensionsController", ["$scope", "extensionConsoleFactory", "$modal", "$log", viewExtensionsController]);
 }());
