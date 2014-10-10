@@ -20,24 +20,24 @@
 
     // ROUTES ===================================================================
 
-	// Get execution details for a given extension and executionId 
-	app.get('getExecutionDetails/:extensionName/:executionId', function(req, res){
-		console.log("Getting execution info for " + extensionName + "/" + executionId);
-		console.log("being get...");
-		request({
-            uri: monitorServiceApiBaseUrl + "/" + extensionName + "/" + executionId,
-            method: "GET"
-		}, function(error, response, body){
-			if (!error) {
-                console.log(response.request.href  + " ===> " + response.statusCode);
-                console.log(body);				
-			} else {
-				console.log(error);
-			}
-			res.send(body);
-		});
-		
-	});
+	// // Get execution details for a given extension and executionId
+	// app.get('getExecutionDetails/:extensionName/:executionId', function(req, res){
+	// 	console.log("Getting execution info for " + extensionName + "/" + executionId);
+	// 	console.log("being get...");
+	// 	request({
+	//             uri: monitorServiceApiBaseUrl + "/" + extensionName + "/" + executionId,
+	//             method: "GET"
+	// 	}, function(error, response, body){
+	// 		if (!error) {
+	//                 console.log(response.request.href  + " ===> " + response.statusCode);
+	//                 console.log(body);
+	// 		} else {
+	// 			console.log(error);
+	// 		}
+	// 		res.send(body);
+	// 	});
+	//
+	// });
 	
 	// Get extension details for a given extension
 	app.get('getExtensionDetails/:extensionName', function(req, res){

@@ -4,14 +4,23 @@
 
     var createExtensionController = function ($scope, $location, extensionConsoleFactory) {
 
-        var extension = {};
+        var model = $scope.model = {};
+        model.extensionList = [];
 
+        // Get all the extensions
+        model.getAllExtensions = function() {
+            extensionConsoleFactory.getExtensionList()
+                        .success(function(data){
+                            model.extensionList = data;
+                        });
+        };
+		
         $scope.registerSubmit = function(){
-
+			var extension = {};
             extension["extensionName"] = $scope.extensionName;
             extension["groupId"] = $scope.groupId;
             extension["artifactId"] = $scope.artifactId;
-            extension["repositoryId"] = "releases";
+            extension["repositoryId"] = $scope.repositoryId;
              
             extensionConsoleFactory.registerExtension(extension)
                 .success(function(data, status, headers, config){
@@ -24,7 +33,12 @@
                     // $window.location.reload();
                  });
         };
-
+		
+        var init = function() {
+			console.log("Initializing... getting all the extensions");
+            model.getAllExtensions();
+        };
+        init();
     };
 
     angular.module("extensionConsole")

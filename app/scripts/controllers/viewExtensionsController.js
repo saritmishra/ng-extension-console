@@ -8,13 +8,15 @@
     http://stackoverflow.com/questions/21239266/angularjs-using-q-to-fire-ajax-calls-synchronously
     **/
 
-    var viewExtensionsController = function ($scope, extensionConsoleFactory, $modal, $log) {
+    var viewExtensionsController = function ($scope, extensionConsoleFactory, extensionService, $modal, $log) {
 
         var model = $scope.model = {};
-        $scope.show = false;
-		$scope.activeRow = {};
+        // Used to show "details"
+		$scope.show = extensionService.getVisualComponent()['show'];
+		// Used to highlight the selected row
+		$scope.selectedRow = extensionService.getVisualComponent()['activeRow'];
+		$scope.clickedExtension = extensionService.getExtensionDetails();
         model.extensionList = [];
-		model.executionInfoList = [];
         model.configPropertyList = [];
 
         // Get all the extensions
@@ -26,21 +28,25 @@
         };
 
         $scope.displayDetails = function(rowIndex, extension) {
-            // Used to highlight the selected row
-            $scope.selectedRow = rowIndex;
-            // Used in "details"
             $scope.show = true;
+            $scope.selectedRow = rowIndex;
+			extensionService.setVisualComponent(true, rowIndex);
 			
 			// TODO - Improve! This is to fetch app info (versions etc) when user clicks the row in viewExtensions.html
 			extensionConsoleFactory.getExtensionDetails(extension.extensionName)
 							.success(function(data){
 									$scope.clickedExtension = data;
+									extensionService.setExtensionDetails(data);
 							});
         };
 
         $scope.closeDetails = function() {
             $scope.show = false;
             $scope.selectedRow=undefined;
+
+			// Clean the state
+			extensionService.setVisualComponent(false, undefined);
+			extensionService.setExtensionDetails({});
         };
 
         // S E T T I N G   U P   C O N F I G   E N T R Y   M O D A L   W I N D O W
@@ -127,5 +133,5 @@
 
     };
 
-    angular.module("extensionConsole").controller("viewExtensionsController", ["$scope", "extensionConsoleFactory", "$modal", "$log", viewExtensionsController]);
+    angular.module("extensionConsole").controller("viewExtensionsController", ["$scope", "extensionConsoleFactory", "extensionService", "$modal", "$log", viewExtensionsController]);
 }());

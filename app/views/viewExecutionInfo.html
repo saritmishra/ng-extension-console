@@ -12,13 +12,13 @@ More on sort! => https://docs.angularjs.org/api/ng/filter/orderBy
 	        </tr>
 	    </thead>
 	    <tbody ng-repeat="extension in model.extensionList track by $index">
-		    <tr class="hover" ng-click="hidden=!hidden; loadExecutionInfo(extension.extensionName, hidden, $index)" ng-class="{active : activeRow[$index]}">
+		    <tr class="hover" ng-click="hidden=!hidden; loadAndSaveExecutionInfo(extension.extensionName, hidden, $index)" ng-class="{active : activeRow[$index]}">
 		        <td>{{extension.extensionName}}</td>
 		        <td>{{extension.groupId}}</td>
 		        <td>{{extension.artifactId}}</td>
 		        <td>{{extension.repositoryId}}</td>
 		    </tr>
-		    <tr ng-show="hidden">
+		    <tr ng-show="activeRow[$index]">
 		        <td colspan="4">
 		            <table class="table table-execution-details">
 		               <thead>
@@ -41,11 +41,11 @@ More on sort! => https://docs.angularjs.org/api/ng/filter/orderBy
 		                        <th>Log Details</th>
 		                    </tr>
 	                   </thead>
-	                   <tr ng-repeat="executionItem in model.executionInfoList | orderBy:predicate:reverse">
+	                   <tr ng-repeat="executionItem in model.executionInfo[extension.extensionName] | orderBy:predicate:reverse">
 	                        <td>{{executionItem.executionDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
 	                        <td>{{executionItem.appVersion}}</td>
 	                        <td>{{executionItem.executionStatus}}</td>
-	                        <td class="no-underline-link" data-toggle="tooltip" title="{{executionItem.details}}"><a ng-href="#/showLogDetails/{{executionItem.appName}}/{{executionItem.executionId}}">{{executionItem.details[0]}}</a></td>
+	                        <td class="no-underline-link" data-toggle="tooltip" title="{{executionItem.details}}"><a ng-href="#/showLogDetails/{{extension.extensionName}}/{{executionItem.executionId}}">{{executionItem.details[0]}}</a></td>
 	                   </tr>
 		            </table>
 		        </td>

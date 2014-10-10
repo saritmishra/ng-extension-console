@@ -1,20 +1,24 @@
 <!--
-  createExtension.html
+	createExtension.html
+
+	Useful links:
+	Autofill? => http://angular-ui.github.io/bootstrap/#/typeahead
 -->
 <form role="form" ng-submit="registerSubmit()" class="well col-md-6" >
   <div class="form-group required has-feedback">
     <label for="extensionName">Extension Name</label>
-    <input type="text" class="form-control" id="extensionName" placeholder="Enter Extension Name" ng-model="extensionName" required>
+	<input type="text" id="extensionName" ng-model="extensionName" typeahead="app.extensionName for app in model.extensionList | filter:$viewValue | limitTo:5" class="form-control" placeholder="Enter Extension Name" required>
     <i class="glyphicon glyphicon-asterisk form-control-feedback"></i>
   </div>
   <div class="form-group required has-feedback">
     <label for="groupId required">Group ID</label>
-    <input type="text" class="form-control" id="groupId" placeholder="Enter Group ID" ng-model="groupId" required>
+	<input type="text" id="groupId" ng-model="groupId" typeahead="app.groupId for app in model.extensionList | filter:$viewValue | limitTo:5" class="form-control" placeholder="Enter Group ID" required>	
+    <!-- <input type="text" class="form-control" id="groupId" placeholder="Enter Group ID" ng-model="groupId" required> -->
     <i class="glyphicon glyphicon-asterisk form-control-feedback"></i>
   </div>
   <div class="form-group required has-feedback">
     <label for="artifactId required">Artifact ID</label>
-    <input type="text" class="form-control" id="artifactId" placeholder="Enter Artifact ID" ng-model="artifactId" required>
+	<input type="text" id="artifactId" ng-model="artifactId" typeahead="app.artifactId for app in model.extensionList | filter:$viewValue | limitTo:5" class="form-control" placeholder="Enter Artifact ID" required>	
     <i class="glyphicon glyphicon-asterisk form-control-feedback"></i>
   </div>
   <!-- User won't be able to change this field because for now,
@@ -23,7 +27,7 @@
   <fieldset disabled>
     <div class="form-group required has-feedback">
       <label for="repositoryId">Repository ID</label>
-      <input type="text" class="form-control" id="repositoryId" placeholder="releases" ng-model="repositoryId" required>
+      <input type="text" class="form-control" id="repositoryId" placeholder="releases" value="releases" ng-model="repositoryId" required>
       <i class="glyphicon glyphicon-asterisk form-control-feedback"></i>
     </div>
   </fieldset>

@@ -8,12 +8,12 @@
     http://stackoverflow.com/questions/21239266/angularjs-using-q-to-fire-ajax-calls-synchronously
     **/
 
-    var viewExecutionsCtrl = function ($scope, extensionConsoleFactory, $modal, $log) {
+    var viewExecutionsCtrl = function ($scope, extensionConsoleFactory, executionService, $modal, $log) {
 
         var model = $scope.model = {};
-		$scope.activeRow = {};
+		$scope.activeRow = executionService.getActiveRow();
         model.extensionList = [];
-		model.executionInfoList = [];
+		model.executionInfo = executionService.getAllExecutionInfo();
 
         // Get all the extensions
         model.getAllExtensions = function() {
@@ -24,21 +24,22 @@
         };
 				
 		// TODO - Improve! This is to fetch execution info for an app when user clicks the row in viewExecutionInfo.html
-		$scope.loadExecutionInfo = function(extensionName, hidden, rowIndex) {					
-			// Only load when opening up the subtable
+		$scope.loadAndSaveExecutionInfo = function(extensionName, hidden, rowIndex) {			
+			// Only load when opening up the sub-table
 			if (hidden) {
 	            // Used to highlight the selected row
-				$scope.activeRow[rowIndex] = true;				
+				$scope.activeRow[rowIndex] = true;
 				extensionConsoleFactory.getExecutionList(extensionName)
 									.success(function(data){
-										model.executionInfoList = data['executionInfoSet'];
+										executionService.setExecutionInfo(extensionName, data['executionInfoSet']);
 									});
 			} else {
 				// Unhighlight the row
 				$scope.activeRow[rowIndex] = false;				
 			}
+			executionService.setActiveRow($scope.activeRow);
 		}
-		
+				
         var init = function() {
 			console.log("Initializing... getting all the extensions");
             model.getAllExtensions();
@@ -47,27 +48,49 @@
 
     };
 
-    angular.module("extensionConsole").controller("viewExecutionsCtrl", ["$scope", "extensionConsoleFactory", "$modal", "$log", viewExecutionsCtrl]);
+    angular.module("extensionConsole").controller("viewExecutionsCtrl", ["$scope", "extensionConsoleFactory", "executionService", "$modal", "$log", viewExecutionsCtrl]);
 	
-	var viewExecutionsDetailsCtrl = function($scope, $routeParams, extensionConsoleFactory, $modal, $log) {
+	var viewExecutionsDetailsCtrl = function($scope, $routeParams, extensionConsoleFactory, executionService, $modal, $log) {
 		
 		var model = $scope.model = {};
 		model.executionInfo = {};
-		
-		model.getExecutionInfo = function(extensionName, executionId) {
-			extensionConsoleFactory.getExecutionDetails(extensionName, executionId)
-				.success(function(data){
-						model.executionInfo = data;
-				});
+				
+		model.getExecutionDetails = function(extensionName, executionId) {
+			var executions = executionService.getExecutionInfo(extensionName);
+			
+			if (executions) {
+				console.log("fetch from cache");
+				model.executionInfo = getExecution(executions, executionId);
+			} 
+			
+			// No saved data; then go and fetch from API			
+			if(Object.keys(model.executionInfo).length === 0) {
+				console.log("fetch from api");
+				extensionConsoleFactory.getExecutionList(extensionName)
+					.success(function(data){
+						model.executionInfo = getExecution(data['executionInfoSet'], executionId);
+						// Make sure to save the goodies
+						executionService.setExecutionInfo(extensionName, data['executionInfoSet']);
+					});
+			}
 		}
+		
+		var getExecution = function(executions, executionId) {
+			for (var i in executions) {
+				if (executions[i]['executionId'] == executionId) {
+					return executions[i];
+				}
+			}
+			return {};
+		};
 		
         var init = function() {
 			console.log("Initializing... getting details for " + $routeParams.appName + "/" + $routeParams.executionId);
-            model.getExecutionInfo($routeParams.appName, $routeParams.executionId);
+            model.getExecutionDetails($routeParams.appName, $routeParams.executionId);
         };
         init();		
 	};
 	
-    angular.module("extensionConsole").controller("viewExecutionsDetailsCtrl", ["$scope", "$routeParams", "extensionConsoleFactory", "$modal", "$log", viewExecutionsDetailsCtrl]);
+    angular.module("extensionConsole").controller("viewExecutionsDetailsCtrl", ["$scope", "$routeParams", "extensionConsoleFactory", "executionService", "$modal", "$log", viewExecutionsDetailsCtrl]);
 	
 }());

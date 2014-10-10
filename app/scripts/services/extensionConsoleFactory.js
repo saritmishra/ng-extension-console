@@ -7,9 +7,9 @@
         var factory = {};
 
         factory.registerExtension = function(extension){
-            // Mock
-            factory.extensionList.push(extension);
-            // return $http.post("/registerExtension/", JSON.stringify(extension));
+            // // Mock
+            // factory.extensionList.push(extension);
+            return $http.post("/registerExtension/", JSON.stringify(extension));
         };
 
         factory.getExtensionList = function() {
